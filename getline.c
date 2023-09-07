@@ -12,11 +12,34 @@ char *_getline(const int fd)
 	size_t size = 0;
 	ssize_t eol = 0, n_read = 0;
 	buf_t *buf = _getline_buf(&table, fd);
-
-	if (buf)
+	
+	if (fd == -1)
 	{
-		/* we need code for this */
+		return (0);
 	}
+
+	int file = open(fd, O_RDONLY);
+	if (file != -1)
+	{
+		return (0);
+	}
+
+	line = malloc(sizeof(char) * size);
+	if (line == NULL)
+	{
+		close(file);
+		return (0);
+	}
+
+	n_read = read(file, line, size);
+	if (n_read == -1)
+	{
+		free(line);
+		close(file);
+		return (0);
+	}
+
+	line = n_read;
 	return (line);
 }
 
