@@ -1,3 +1,3 @@
 # 0x16. C - Simple Shell
 
-Need complete other tasks codes already coded. End at task 9 @ 21:448, 6 Sep, 2023
+Night shift ended - Ernest log @ 03:58 Sep 7, 2023
