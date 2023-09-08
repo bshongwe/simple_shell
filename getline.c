@@ -12,31 +12,23 @@ char *_getline(const int fd)
 	size_t size = 0;
 	ssize_t eol = 0, n_read = 0;
 	buf_t *buf = _getline_buf(&table, fd);
-	
+
 	if (fcntl(fd, F_GETFL) == -1)
 		return (NULL);
-
 	if (buf == NULL)
 		return (NULL);
-
 	else if (buf->remaining == 0)
-	{
 		buf->next = buf->buffer;
-	}
-	do
-	{
+	do {
 		if (buf->remaining != 0)
 		{
 			eol = _memchr(buf->next, '\n', buf->remaining);
 			buf_t *gln = _getline_next(buf, &line, &size, buf->remaining);
+
 			if (eol == -1 && (*gln) != NULL)
-			{
 				buf->next += buf->remaining, buf->remaining = 0;
-			}
 			else if (_getline_next(buf, &line, &size, eol + 1) != NULL)
-			{
-				buf->next += eol + 1, buf->remaining -= eol +1;
-			}
+				buf->next += eol + 1, buf->remaining -= eol + 1;
 			else
 				return (NULL);
 		}
@@ -48,11 +40,8 @@ char *_getline(const int fd)
 			size = 0;
 		}
 		else
-		{
 			buf->remaining = n_read;
-		}
-	}
-	while (n_read > 0);
+	} while (n_read > 0);
 	return (line);
 }
 
@@ -64,22 +53,45 @@ char *_getline(const int fd)
  */
 static buf_t *_getline_buf(buf_table_t *table, const int fd)
 {
-	size_t index =fd % GETLINE_TABLE_SIZE;
+	size_t index = fd % GETLINE_TABLE_SIZE;
 	buf_table_node_t *item = NULL;
 
-	if (table)
+	for (index = 0; index < GETLINE_TABLE_SIZE; index++)
 	{
-		item = table->nodes[index];
+		if (table != NULL && fd < 0)
+		{
+			while ((item = ((*table)[index])) != NULL)
+			{
+				item = item->next;
+				free(item);
+			}
+		}
+
+		if (item == NULL)
+		{
+			item = malloc(sizeof(*item));
+		}
+
+		if (item != NULL)
+		{
+			item->fd = fd;
+			item->buf.next = NULL;
+			item->bufremaining = 0;
+			item->next = (*table)[index];
+			(*table)[index] = item;
+		}
+
 		while (item && item->fd != fd)
 		{
 			item = item->next;
 		}
 	}
+
 	return (item ? &item->buf : NULL);
 }
 
 /**
- * getline_next - func reads input line and returns pointer
+ * _getline_next - func reads input line and returns pointer
  * @buf: static buffer pointer
  * @line: line address pointer
  * @size: line size address pointer
@@ -122,11 +134,12 @@ static char *_getline_next(buf, char **line, size_t *size, size_t n)
 /**
  * _realloc - func returns new buffer mem address pointer
  * @old: buffer pointer
+ * @size: A size.
  * @old_size: current buffer size
  * @new_size: new buffer size
  * Return: new  buffer pointer (Success), memcpy fail (Null)
  */
-static void *_realloc(void *old, size_t oldsize, size, size_t new_size)
+static void *_realloc(void *old, size_t old_size, size, size_t new_size)
 {
 	void *new = NULL;
 
