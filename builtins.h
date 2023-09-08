@@ -9,6 +9,9 @@
 /* Local Libraries */
 #include "path.h"
 #include "env.h"
+#include "path.h"
+#include "error.h"
+#include "alias.h"
 
 /* Definitions */
 #define EXIT_HELP "exit [STATUS]"
@@ -41,6 +44,15 @@
 	"If DIR is -, current directory assumes previous value.\0"		\
 	"\0"
 
+#define ALIAS_HELP "alias [KEY[=VALUE] ...]"
+#define ALIAS_DESC									\
+	"Define and display aliases.\n\0"						\
+	"If no arguments are given, existing alias definitions are displayed.\0"	\
+	"Otherwise, alias is defined for each KEY=VALUE pair.\0"			\
+	"Each KEY with no VALUE, matching alias is dislayed. \0"			\
+	"If VALUE ends with a space, next word will be expanded.\0"			\
+	"\0"
+
 /* Builtin Struct */
 typedef int (*builtin_fp)(info_t *);
 
@@ -68,5 +80,8 @@ int __setenv(info_t *info);
 int __unsetenv(info_t *info);
 int __env(info_t *info);
 int __cd(info_t *info);
+int __alias(info_t *info);
+int __help(info_t *info);
+int __alias(info_t *info);
 
 #endif /* end of BUILTINS_H file */
