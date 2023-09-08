@@ -1,4 +1,5 @@
 #include "builtins.h"
+#include "string.h"
 
 /**
  * atou - func converts string to int
