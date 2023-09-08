@@ -1,4 +1,4 @@
-#include /* header file --> dict */
+#include "dict.h"
 
 /**
  * get_dict_node - func retrieves specific node using key
