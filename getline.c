@@ -15,29 +15,24 @@ char *_getline(const int fd)
 	
 	if (fd == -1)
 	{
-		return (0);
+		return (NULL);
+	}
+	
+	buf _getline_buf(&table, fd);
+	if (buf == NULL)
+	{
+		return (NULL);
 	}
 
-	int file = open(fd, O_RDONLY);
-	if (file != -1)
+	while (1)
 	{
-		return (0);
-	}
+		n_read = read(fd, buf->data, BUF_SIZE);
+		if (n_read == -1 || n_read == 0)
+		{
+			break;
+		}
 
-	line = malloc(sizeof(char) * size);
-	if (line == NULL)
-	{
-		close(file);
-		return (0);
-	}
-
-	n_read = read(file, line, size);
-	if (n_read == -1)
-	{
-		free(line);
-		close(file);
-		return (0);
-	}
+		eol = 
 
 	line = n_read;
 	return (line);
@@ -56,7 +51,11 @@ static buf_t *_getline_buf(buf_table_t *table, const int fd)
 
 	if (table)
 	{
-		/* we need code for this */
+		item = table->nodes[index];
+		while (item && item->fd != fd)
+		{
+			item = item->next;
+		}
 	}
 	return (item ? &item->buf : NULL);
 }
