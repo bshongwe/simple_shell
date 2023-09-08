@@ -56,3 +56,25 @@ cmdlist_t *add_cmd_end(cmdlist_t **headptr, const char *cmd)
 
 /**
  * pop_cmd - func gets node tokens and removes node from buffer
+ * @headptr: first input node
+ * Return: cmd tokens (Success)
+ */
+char **pop_cmd(cmdlist_t **headptr)
+{
+	char **tokens;
+	cmdlist_t *pop;
+
+	if (!(headptr && *headptr))
+	{
+		return (NULL);
+	}
+
+	pop = *headptr;
+	tokens = pop->tokens;
+	*headptr = (*headptr)->next;
+
+	free_cmdtree(&(pop->tree));
+	free(pop);
+
+	return (tokens);
+}
