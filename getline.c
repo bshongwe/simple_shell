@@ -13,28 +13,46 @@ char *_getline(const int fd)
 	ssize_t eol = 0, n_read = 0;
 	buf_t *buf = _getline_buf(&table, fd);
 	
-	if (fd == -1)
-	{
+	if (fcntl(fd, F_GETFL) == -1)
 		return (NULL);
-	}
-	
-	buf _getline_buf(&table, fd);
+
 	if (buf == NULL)
-	{
 		return (NULL);
-	}
 
-	while (1)
+	else if (buf->remaining == 0)
 	{
-		n_read = read(fd, buf->data, BUF_SIZE);
-		if (n_read == -1 || n_read == 0)
+		buf->next = buf->buffer;
+	}
+	do
+	{
+		if (buf->remaining != 0)
 		{
-			break;
+			eol = _memchr(buf->next, '\n', buf->remaining);
+			buf_t *gln = _getline_next(buf, &line, &size, buf->remaining);
+			if (eol == -1 && (*gln) != NULL)
+			{
+				buf->next += buf->remaining, buf->remaining = 0;
+			}
+			else if (_getline_next(buf, &line, &size, eol + 1) != NULL)
+			{
+				buf->next += eol + 1, buf->remaining -= eol +1;
+			}
+			else
+				return (NULL);
 		}
-
-		eol = 
-
-	line = n_read;
+		n_read = read(fd, buf->buffer, GETLINE_BUFFER_SIZE);
+		if (n_read == -1)
+		{
+			free(line);
+			*line = NULL;
+			size = 0;
+		}
+		else
+		{
+			buf->remaining = n_read;
+		}
+	}
+	while (n_read > 0);
 	return (line);
 }
 
