@@ -1,4 +1,4 @@
-#include /* command */
+#include "command.h"
 
 /**
  * free_cmdlist - func sets head to NULL after free linked list
