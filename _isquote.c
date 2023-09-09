@@ -7,5 +7,12 @@
  */
 bool _isquote(int c)
 {
-	/* complete this */
+	if (c == '\'' || c == '\"')
+	{
+		return (1);
+	}
+	else
+	{
+		return (0);
+	}
 }
