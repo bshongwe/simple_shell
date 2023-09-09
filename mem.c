@@ -1,4 +1,4 @@
-/* string.h */
+#include "string.h"
 
 /**
  * _memset - func fill specific mem with specific value
