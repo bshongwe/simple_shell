@@ -5,7 +5,7 @@
  * @info: shell programme info
  * Return: final token num (Success)
  */
-int pars(info_t *info)
+int parse(info_t *info)
 {
 	char **tokens, *tok;
 	size_t n = 0;
@@ -13,7 +13,35 @@ int pars(info_t *info)
 
 	while (cmd)
 	{
-		/* code here */
+		remove_comment(cmd);
+		if (!cmd->tokens)
+		{
+			cmd = cm->next;
+			del_cmd(&(info->commands), n);
+			continue;
+		}
+		expand_aliases(info->aliases, &(cmd->tokens));
+		if (!cmd->tokens)
+		{
+			cmd = cmd->next;
+			del_cmd(&(info->commands), n);
+			continue;
+		}
+		expand_vars(info, &(cmd->tokens));
+		if (!cmd->tokens)
+		{
+			cmd = cmd->next;
+			del_cmd(&(info->commands), n);
+			continue;
+		}
+		tokens = cmd->tokens;
+		for (tok = tokens; tok; tok = *(++tokens))
+		{
+			*tokens = dequote(tok);
+			free(tok);
+		}
+		cm = cmd->next;
+		++n;
 	}
 	return (n);
 }
