@@ -7,19 +7,24 @@
  * Return: The varibles value.
  */
 
-int _get_varibles(info_t *info)
+int (info_t *info)
 {
 	if (getline)
 	{
 		write(STDERR_FILENO, "Usage: command S?\n", 18);
 	}
-	if ((_get_varibles()) == NULL && av[2] != $?)
+	if ((_getline(info)) == NULL && args != $?)
 	{
 		perror(Command not found);
 	}
 
-	/*store the previous commands return value and return it*/
-	return $? = /*0 if prev cmd success -1 if prev commnd failed*/
+	char *path getenv("PATH");
+
+	return (path);
+	else
+	{
+		return (-1);
+	}
 }
 
 /**
