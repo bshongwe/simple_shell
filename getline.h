@@ -36,7 +36,7 @@ typedef struct buf_s
 } but_t;
 
 /* Prototypes */
-typedef buf_table_node_t *bu_table_t[GETLINE_TABLE_SIZE];
+typedef buf_table_node_t *buf_table_t[GETLINE_TABLE_SIZE];
 char *_getline(const int fd);
 
 #endif /* _ end of GETLINE_H file */
