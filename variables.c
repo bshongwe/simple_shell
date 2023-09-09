@@ -1,5 +1,7 @@
 #include "varibles.h"
 
+/* Code has syntax errors. Looks more like python than it does C */
+
 /**
  * _get_variables - Get variables to quckily execute commands.
  *
