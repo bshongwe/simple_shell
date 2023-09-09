@@ -11,6 +11,8 @@
 #include "alias.h"
 #include "error.h"
 #include "tokens.h"
+#include "history.h"
+#include "list.h"
 
 extern char **environ;
 
@@ -31,6 +33,9 @@ extern char **environ;
  * @argv: args passed
  * @exe: args passed
  * @status: args passed
+ * @history: args passed
+ * @interactive: args passed
+ * @pid: args passed
  */
 struct info
 {
@@ -44,8 +49,10 @@ struct info
 	size_t lineno;
 	char *exe
 	char **tokens;
+	int interactive;
 	env_t *env;
 	list_t *path;
+	history_t *history;
 	alias_t *aliases;
 	cmdlist_t *commands;
 };
