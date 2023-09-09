@@ -29,22 +29,22 @@ int _isspecial_double(char c)
 	}
 	else if (c == 'v')
 	{
-		/*vertical tab*/
+		/*vertical tab: not sure if I coded for this*/
 		return (1);
 	}
 	else if (c == 'r')
 	{
-		/*return AKA enter*/
+		/*return AKA enter: this too*/
 		return (1);
 	}
 	else if (c == 'f')
 	{
-		/*form feed, Never heard of this one before, but it is special*/
+		/*form feed, Never heard of this one before, but it is special: and this too*/
 		return (1);
 	}
 	else
 	{
-		/*not special*/
+		/*not special: let's hope this will work*/
 		return (0);
 	}
 }
