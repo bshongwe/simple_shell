@@ -1,4 +1,4 @@
-#include /* shell main */
+#include "shell.h"
 
 /**
  * _execute - func executes and forks current cmd in env
