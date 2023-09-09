@@ -18,9 +18,9 @@
 
 	typedef struct;
 	{
-		$?; fptr = _$?_variable;
-		$$;
-		$PATH;
+		"$?", fptr = _$?_variable;
+		"$$",;
+		"$PATH",;
 
 	} Varibles;
 
