@@ -7,5 +7,12 @@
  */
 bool _isspace(int c)
 {
-	/* complete this */
+	if (c == ' ')
+	{
+		return (1);
+	}
+	else
+	{
+		return (0);
+	}
 }
