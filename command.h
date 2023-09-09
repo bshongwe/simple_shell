@@ -4,6 +4,8 @@
 #include "types.h"
 #include "string.h"
 #include <stdlib.h>
+#include "tokens.h"
+#include "types.h"
 
 /**
  * struct cmdlist - func for link list cmds
@@ -53,10 +55,10 @@ struct cmdtree
  */
 typedef enum cmdlist_sep_n /* need to assign values below */
 {
-	SEMICOLON =,
-	AMPERSAND =,
-	AND       =,
-	OR        =
+	SEMICOLON = 1,
+	AMPERSAND = 2,
+	AND       = 4,
+	OR        = 8
 } cmdlist_sep_n_t;
 
 /* Prototypes entered below */
