@@ -12,6 +12,10 @@
 #include "path.h"
 #include "error.h"
 #include "alias.h"
+#include "path.h"
+#include "types.h"
+#include "string.h"
+#include "info.h"
 
 /* Definitions */
 #define EXIT_HELP "exit [STATUS]"
