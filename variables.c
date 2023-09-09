@@ -15,7 +15,7 @@ int get_return_status(info_t *info)
 		if (command != NULL)
 		{
 			write(STDOUT_FILENO, status, 1);
-			return WEXITSTATUS(command);
+			return (WEXITSTATUS(command));
 		}
 	}
 }
@@ -53,7 +53,7 @@ int get_pid(info_t *info)
  */
 
 int get_path(info_t *info)
-{	
+{
 	char *path getenv("PATH");
 
 	if (info != NULL)
