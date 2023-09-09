@@ -11,7 +11,7 @@ void free_cmdlist(cmdlist_t **headptr)
 	{
 		free_cmdlist(&((*heaptr)->next));
 		free_cmdtree(&((*headptr)->tree));
-		/* fix this --> tokens; */
+		free_cmdlist(&((*headptr)->tokens));
 		free(*headptr);
 		*headptr = NULL;
 	}
@@ -77,4 +77,32 @@ char **pop_cmd(cmdlist_t **headptr)
 	free(pop);
 
 	return (tokens);
+}
+
+/**
+ * del_cmd - func removes cmd from cmd list
+ * @headptr: first input node
+ * @index: argument input
+ * Return: address of node
+ */
+cmdlist_t *del_cmd(cmdlist_t **headptr, sie_t index)
+{
+	cmdlist *old;
+
+	if (!(headptr && *headptr))
+	{
+		return (NULL);
+	}
+	if (index)
+	{
+		return (del_cmd(&((*headptr)->next), index - 1));
+	}
+
+	old = *headptr;
+	*headptr = (*headptr)->next;
+	free_cmdtree(&(old->tree));
+	free_tokens(&(old->tokens));
+	free(old);
+
+	return (old);
 }
