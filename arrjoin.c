@@ -8,7 +8,7 @@
  */
 char **arrjoin(char **arr1, char **arr2)
 {
-	char ** new;
+	char **new;
 	size_t arr1_len = 0, arr2_len = 0, new_len;
 
 	if (arr1)

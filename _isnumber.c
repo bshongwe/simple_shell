@@ -1,4 +1,4 @@
-#include "ctype.h" 
+#include "ctype.h"
 
 /**
  * _isnumber - func verifies string for strictly digits

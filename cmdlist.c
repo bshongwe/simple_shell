@@ -43,7 +43,7 @@ cmdlist_t *add_cmd_end(cmdlist_t **headptr, const char *cmd)
 	new->next = NULL;
 	new->tree = NULL;
 
-	new-> = tokenize(cmd);
+	new->tokens = tokenize(cmd);
 	if (!new->tokens)
 	{
 		free(new);
