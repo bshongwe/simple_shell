@@ -16,7 +16,7 @@
 
 /*STRUCTS*/
 
-	typedef struct;
+	typedef struct
 	{
 		"$?", fptr = _$?_variable;
 		"$$",;

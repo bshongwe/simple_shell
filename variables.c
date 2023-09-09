@@ -1,30 +1,5 @@
 #include "varibles.h"
 
-/* Code has syntax errors. Looks more like python than it does C */
-
-/**
- * _get_variables - Get variables to quckily execute commands.
- *
- *
- * Return: The varibles value.
- */
-
-_get_varibles(command, varible)
-{
-	stucts i = 0;
-
-	while (i != NULL)
-	{
-		if (varible != NULL && varible == stuct[i])
-		{
-			/*need to store command? e.g. (echo)*/
-			return (stuctfp);
-		}
-		i++;
-	}
-	return (NULL);
-}
-
 /**
  * _$?_variable_func - Get variables to quckily execute commands.
  *
@@ -32,9 +7,9 @@ _get_varibles(command, varible)
  * Return: The varibles value.
  */
 
-_$?_varible_func(_get_varibles())
+int _get_varibles(info_t *info)
 {
-	if (argc != 3)
+	if (getline)
 	{
 		write(STDERR_FILENO, "Usage: command S?\n", 18);
 	}
@@ -88,5 +63,5 @@ _$PATH_varible_func()
 	{
 		perror(Command not found);
 	}
-	/*return the path*/
+	return (_search_path(argument);
 }
