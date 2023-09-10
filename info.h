@@ -35,7 +35,6 @@ extern char **environ;
  * @status: args passed
  * @history: args passed
  * @interactive: args passed
- * @pid: args passed
  */
 struct info
 {
