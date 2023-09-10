@@ -44,7 +44,7 @@ list_t *_str_to_list(list_t **tailptr, const char *str, char delim)
 
 	if (len == -1)
 	{
-		len = _str;en(str);
+		len = _strlen(str);
 	}
 
 	tail = add_node_end(tailptr, NULL);
