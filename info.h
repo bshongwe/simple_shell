@@ -35,7 +35,6 @@ extern char **environ;
  * @status: args passed
  * @history: args passed
  * @interactive: args passed
- * @pid: args passed
  */
 struct info
 {
@@ -47,7 +46,7 @@ struct info
 	char *cwd;
 	char **argv;
 	size_t lineno;
-	char *exe
+	char *exe;
 	char **tokens;
 	int interactive;
 	env_t *env;

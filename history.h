@@ -1,8 +1,8 @@
 #ifndef HISTORY_H
 #define HISTORY_H
 
-	#include "types.h"
-	#include "list.h"
+#include "types.h"
+#include "list.h"
 
 /**
  * struct history - struct for shell cmd history
