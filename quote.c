@@ -1,4 +1,4 @@
-/* quote header */
+#include "quote.h"
 
 /**
  * quote_state_len - func gets length of specific state
