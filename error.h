@@ -2,6 +2,7 @@
 #define ERROR_H
 
 #include <unistd.h>
+#include "string.h"
 #include <stdio.h>
 #include <stdarg.h>
 

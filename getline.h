@@ -7,6 +7,7 @@
 
 /*Getline Libraries */
 #include <unistd.h>
+#include "string.h"
 #include <stdlib.h>
 
 /**
@@ -33,7 +34,7 @@ typedef struct buf_s
 	char buffer[GETLINE_BUFFER_SIZE];
 	char *next;
 	size_t remaining;
-} but_t;
+} buf_t;
 
 /* Prototypes */
 typedef buf_table_node_t *buf_table_t[GETLINE_TABLE_SIZE];

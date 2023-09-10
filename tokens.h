@@ -14,5 +14,7 @@ size_t count_tokens_no_quote(const char *str);
 
 /* Additional Mem-ware */
 char **tokenize_noquote(const char *str);
+char **arrjoin(char **arr1, char **arr2);
+char **arrdup(char **arr);
 
 #endif /* end of  TOKENS_H */

@@ -11,4 +11,4 @@
 
 char *search_path(info_t *info, list_t *path);
 
-#endif /* PATH_H */
+#endif /* end of PATH_H file */

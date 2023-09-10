@@ -1,12 +1,12 @@
 #ifndef LIST_H
 #define LIST_H
 
-/* ~LIBRARIES~ */
+/* LIBRARIES */
 #include <stdlib.h>
 #include "string.h"
 #include "types.h"
 
-/* ~STRUCTS~ */
+/* STRUCTS */
 /**
  * struct list - Singly linked list.
  * @str: A dynamically-allocated string.
@@ -18,7 +18,7 @@ struct list
 	struct list *next;
 };
 
-/* ~PROTOTYPES~ */
+/* PROTOTYPES */
 
 list_t *str_to_list(const char *str, char delim);
 list_t *_str_to_list(list_t **tailptr, const char *str, char delim);
@@ -26,4 +26,4 @@ list_t *add_node(list_t **headptr, const char *str);
 list_t *add_node_end(list_t **headptr, const char *str);
 void free_list(list_t **headptr);
 
-#endif /* ~LIST_H~ */
+#endif /* end of LIST_H file */

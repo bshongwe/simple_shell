@@ -47,8 +47,9 @@ struct info
 	char *cwd;
 	char **argv;
 	size_t lineno;
-	char *exe
+	char *exe;
 	char **tokens;
+	pid_t pid;
 	int interactive;
 	env_t *env;
 	list_t *path;

@@ -62,6 +62,14 @@ typedef enum cmdlist_sep_n /* need to assign values below */
 } cmdlist_sep_n_t;
 
 /* Prototypes entered below */
-
+void free_cmdtree(cmdtree_t **rootptr);
+void free_cmdlist(cmdlist_t **headptr);
+char **pop_cmd(cmdlist_t **headptr);
+size_t split_cmd(char *cmd);
+cmdtree_t *cmd_to_tree(const char * const *tokens);
+cmdlist_t *del_cmd(cmdlist_t **headptr, size_t index);
+cmdlist_t *_cmd_to_list(cmdlist_t **tailptr, char *split, size_t count);
+cmdlist_t *add_cmd_end(cmdlist_t **headptr, const char *cmd);
+cmdlist_t *cmd_to_list(const char *cmd);
 
 #endif /* end of COMMAND_H file */
