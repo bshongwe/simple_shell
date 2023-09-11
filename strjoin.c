@@ -1,3 +1,5 @@
+#include "string.h"
+
 /**
  * strjoinl - func joins string list with char
  * @n: length of new string pointer
