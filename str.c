@@ -61,3 +61,72 @@ char *_strdup(const char *str)
 	}
 	return (dup);
 }
+
+/**
+ * _strcpy - func copies string from src to dest
+ * @dest: destination address
+ * @src: source address
+ * Return: dest pointer (Success)
+ */
+char *_strcpy(char *dest, const char *src)
+{
+	char *pos = dest;
+
+	while (*src)
+	{
+		*pos++ = *src++;
+	}
+	*pos = '\0';
+
+	return (dest);
+}
+
+/**
+ * _strlen - func computes lengh of string
+ * @str: string input
+ * Return: length of string
+ */
+ssize_t _strlen(const char *str)
+{
+	const char *pos = str;
+
+	if (!str)
+	{
+		return (-1);
+	}
+
+	while (*pos)
+	{
+		++pos;
+	}
+
+	return (pos - str);
+}
+
+/**
+ * _strcmp - func compares s1 and s2
+ * @s1: string input
+ * @s2: string input
+ * Return: s1 = s2 (0), s1 < s2 (-1), s1 > s2 (1)
+ */
+int _strcmp(const char *s1, const char *s2)
+{
+	for (; *s1 && *s2; ++s1, ++s2)
+	{
+		if (*s1 != *s2)
+		{
+			return (*s1 - *s2);
+		}
+	}
+
+	if (*s1)
+	{
+		return (1);
+	}
+	if (*s2)
+	{
+		return (-1);
+	}
+
+	return (0);
+}

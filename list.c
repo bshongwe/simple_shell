@@ -1,6 +1,24 @@
 #include "list.h"
 
 /**
+ * free_list - func fress linked list and sets head to NULL
+ * @headptr: head list node
+ * Return: void
+ */
+void free_list(list_t **headptr)
+{
+	if (!*headptrr)
+	{
+		return;
+	}
+
+	free_list(&((*headptr)->next));
+	free((*headptr)->str);
+	free(*headptr);
+	*headptr = NULL;
+}
+
+/**
  * str_to_list - Turn a string into a linked list.
  * @str: The string passed.
  * @delim: The delimiter passed.
@@ -27,6 +45,67 @@ list_t *str_to_list(const char *str, char delim)
 	}
 
 	return (head);
+}
+
+/**
+ * add_node - func inserts string at list head
+ * @headptr: first list node pointer address
+ * @str: string input
+ * Return: address of new node (Success), malloc fail (NULL)
+ */
+list_t *add_node(list_t **headptr, const char *str)
+{
+	list_t *new;
+
+	if (!headptr)
+	{
+		return (NULL);
+	}
+
+	new = malloc(sizeof(list_t));
+	if (!new)
+	{
+		return (NULL);
+	}
+
+	new->str = _strdup(str);
+	new->next = *headptr;
+
+	*headptr = new;
+
+	return (new);
+}
+
+/**
+ * add_node_end - func inserts string at list tail
+ * @headptr: first list pointer address
+ * @str: string input
+ * Return: address of new node node (Success), malloc fail (NULL)
+ */
+list_t *add_node_end(list_t **headptr, const char *str)
+{
+	list_t *new;
+
+	if (!headptr)
+	{
+		return (NULL);
+	}
+
+	if (*headptr)
+		return (add_node_end(&((*headptr)->next), str));
+
+	new = malloc(sizeof(list_t));
+	if (!new)
+	{
+		return (NULL);
+	}
+
+	new->str = _strdup(str);
+	new->next = *headptr;
+
+	*headptr = new;
+
+	return (new);
 }
 
 /**

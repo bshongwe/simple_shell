@@ -8,27 +8,27 @@
  */
 char *search_path(info_t *info, list_t *path)
 {
-	char *path_name, *cmd = *info->tokens;
+	char *pathname, *command = *info->tokens;
 	struct stat sb;
 
 	while (path)
 	{
 		if (*path->str == '\0')
 		{
-			path_name = strjoin(NULL, "/", info->cwd, cmd);
+			pathname = strjoin(NULL, "/", info->cwd, command);
 		}
 		else
 		{
-			path_name = strjoin(NULL, "/", path->str, cmd);
+			pathname = strjoin(NULL, "/", path->str, command);
 		}
-		if (stat(path_name, &sb) == 0)
+		if (stat(pathname, &sb) == 0)
 		{
 			if ((sb.st_mode & S_IFMT) != S_IFDIR)
 			{
-				return (path_name);
+				return (pathname);
 			}
 		}
-		free(path_name);
+		free(pathname);
 		path = path->next;
 	}
 	return (NULL);
