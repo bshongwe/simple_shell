@@ -4,7 +4,7 @@
 #include "dict.h"
 #include <stdlib.h>
 
-typedef dict_ env_t;
+typedef dict_t env_t;
 
 /* Prototypes */
 char **dict_to_env(env_t *head);

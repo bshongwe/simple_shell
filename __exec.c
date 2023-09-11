@@ -1,4 +1,4 @@
-#include "bultins.h"
+#include "builtins.h"
 
 /**
  * __exec - func loads new program after replacing running shell

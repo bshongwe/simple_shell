@@ -7,9 +7,9 @@
  */
 void free_cmdlist(cmdlist_t **headptr)
 {
-	if (hedaptr && *headptr)
+	if (headptr && *headptr)
 	{
-		free_cmdlist(&((*heaptr)->next));
+		free_cmdlist(&((*headptr)->next));
 		free_cmdtree(&((*headptr)->tree));
 		free_cmdlist(&((*headptr)->tokens));
 		free(*headptr);
@@ -85,9 +85,9 @@ char **pop_cmd(cmdlist_t **headptr)
  * @index: argument input
  * Return: address of node
  */
-cmdlist_t *del_cmd(cmdlist_t **headptr, sie_t index)
+cmdlist_t *del_cmd(cmdlist_t **headptr, size_t index)
 {
-	cmdlist *old;
+	cmdlist_t *old;
 
 	if (!(headptr && *headptr))
 	{

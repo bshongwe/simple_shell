@@ -8,6 +8,7 @@
 int __alias(info_t *info)
 {
 	char *name, **args = info->tokens + 1;
+	alias_t *alias;
 	ssize_t name_len;
 
 	info->status = EXIT_SUCCESS;
@@ -22,7 +23,7 @@ int __alias(info_t *info)
 					__alias_print(alias);
 				else
 				{
-					perrorl("not found", *info->token, *args, NULL);
+					perrorl("not found", *info->tokens, *args, NULL);
 					info->status = EXIT_FAILURE;
 				}
 			}
@@ -36,7 +37,7 @@ int __alias(info_t *info)
 	}
 	else
 	{
-		for (alias = info->aliases; alias; alia = alias->next)
+		for (alias = info->aliases; alias; alias = alias->next)
 			__alias_print(alias);
 	}
 	return (info->status);
@@ -62,9 +63,9 @@ void __alias_print(alias_t *alias)
  * @value: alias value
  * Return: void
  */
-void __alias_add(alias_t **aliases, cont char *name, const char *value)
+void __alias_add(alias_t **aliases, const char *name, const char *value)
 {
-	alias_t *alias = get_dict_node(aliases ? *aliaes : NULL, name);
+	alias_t *alias = get_dict_node(aliases ? *aliases : NULL, name);
 
 	if (alias)
 	{

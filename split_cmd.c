@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "hsh.h"
 
 /**
  * split_cmd - func splits NULL-byte cmd on unquoted semicolon

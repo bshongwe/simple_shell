@@ -83,11 +83,11 @@ void __cd_success(info_t *info)
 	info->cwd = getcwd(NULL, 0);
 
 	setenv_tokens[1] = "PWD";
-	setenv_tokens[2] = inf->cwd;
+	setenv_tokens[2] = info->cwd;
 
 	__setenv(info);
 
 	info->tokens = tokens;
 
-	infostatus = EXIT_SSUCCESS;
+	info->status = EXIT_SUCCESS;
 }

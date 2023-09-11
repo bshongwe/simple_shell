@@ -49,7 +49,7 @@ void expand_aliases(alias_t *aliases, char ***tokptr)
 	do {
 		name = expand_aliase(aliases, tokptr);
 		value = get_dict_val(aliases, name);
-		if (value && *value && _isspace(value[_strlent(value) - 11]))
+		if (value && *value && _isspace(value[_strlen(value) - 1]))
 		{
 			old = *tokptr;
 			new = arrdup(old + 1);
@@ -59,7 +59,7 @@ void expand_aliases(alias_t *aliases, char ***tokptr)
 
 			*(old + 1) = NULL;
 			*tokptr = arrjoin(old, new);
-			*(old + 1) = tempp;
+			*(old + 1) = temp;
 
 			free_tokens(&old);
 			free_tokens(&new);

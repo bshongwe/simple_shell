@@ -94,7 +94,7 @@ void free_dict(dict_t **headptr)
 	{
 		return;
 	}
-	free_dict(&((*heaptr)->next));
+	free_dict(&((*headptr)->next));
 	free((*headptr)->key);
 	free((*headptr)->val);
 	free(*headptr);
@@ -107,7 +107,7 @@ void free_dict(dict_t **headptr)
  * @key: entry key
  * Return: entry key
  */
-char *get_dict_val(dic_t *head, const char *key)
+char *get_dict_val(dict_t *head, const char *key)
 {
 	if (!key)
 	{

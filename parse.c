@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "hsh.h"
 
 /**
  * parse - func parses input, expands aliases, vars and word split
@@ -9,14 +9,14 @@ int parse(info_t *info)
 {
 	char **tokens, *tok;
 	size_t n = 0;
-	cmdlist *cmd = info->commands = cmd_to_list(info->line);
+	cmdlist_t *cmd = info->commands = cmd_to_list(info->line);
 
 	while (cmd)
 	{
 		remove_comment(cmd);
 		if (!cmd->tokens)
 		{
-			cmd = cm->next;
+			cmd = cmd->next;
 			del_cmd(&(info->commands), n);
 			continue;
 		}
@@ -40,7 +40,7 @@ int parse(info_t *info)
 			*tokens = dequote(tok);
 			free(tok);
 		}
-		cm = cmd->next;
+		cmd = cmd->next;
 		++n;
 	}
 	return (n);

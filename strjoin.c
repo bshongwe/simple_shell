@@ -14,7 +14,7 @@ char *strjoinl(size_t *n, const char *sep, ...)
 	size_t idx = 0, len, sep_len = _strlen(sep ? sep : "");
 	va_list ap;
 
-	for (va_start(ap, sep); (temp = vaarg(ap, char *)); idx += 1)
+	for (va_start(ap, sep); (temp = va_arg(ap, char *)); idx += 1)
 	{
 		len += _strlen(temp);
 	}
@@ -37,11 +37,11 @@ char *strjoinl(size_t *n, const char *sep, ...)
 					len += sep_len;
 				}
 			}
-			va_end(ap)
-				if (n)
-				{
-					*n = len + 1;
-				}
+			va_end(ap);
+			if (n)
+			{
+				*n = len + 1;
+			}
 		}
 	}
 	return (dest);

@@ -16,7 +16,7 @@ char **tokenize(const char *str)
 	if (!str)
 		return (NULL);
 
-	tokens = malloc(sizeof(char *) * (count(str) + 1));
+	tokens = malloc(sizeof(char *) * (count_tokens(str) + 1));
 	if (!tokens)
 		return (NULL);
 
@@ -41,7 +41,7 @@ char **tokenize(const char *str)
 			free_tokens(&tokens);
 			return (NULL);
 		}
-		token[count][str - tok] = '\0';
+		tokens[count][str - tok] = '\0';
 	}
 	tokens[count] = NULL;
 
@@ -95,7 +95,7 @@ char **tokenize_noquote(const char *str)
 		return (NULL);
 	}
 
-	for (conut = 0; *str; ++count)
+	for (count = 0; *str; ++count)
 	{
 		while (_isspace(*str))
 			++str;

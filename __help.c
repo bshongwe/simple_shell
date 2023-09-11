@@ -10,7 +10,7 @@ int __help(struct info *info)
 	size_t len = 0;
 	const builtin_t *bp = NULL;
 	const char *desc = NULL;
-	const char *desc = NULL;
+	const char *args = NULL;
 
 	if (*args)
 	{
@@ -30,7 +30,7 @@ int __help(struct info *info)
 					write(STDOUT_FILENO, desc, len);
 					write(STDOUT_FILENO, "\n", 1);
 				}
-				inf->status = EXIT_SUCCESS;
+				info->status = EXIT_SUCCESS;
 			}
 			args += 1;
 		}

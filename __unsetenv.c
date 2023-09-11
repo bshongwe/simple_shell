@@ -19,7 +19,7 @@ int __unsetenv(info_t *info)
 	}
 	else
 	{
-		perror("Too few arguments.", *info->tokens, NULL);
+		perrorl("Too few arguments.", *info->tokens, NULL);
 		info->status = EXIT_FAILURE;
 	}
 	return (info->status);

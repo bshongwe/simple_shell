@@ -53,6 +53,7 @@ void *_memcpy(void *dest, const void *src, size_t n)
 ssize_t _memchr(const void *src, unsigned char chr, size_t n)
 {
 	ssize_t i = 0;
+	const unsigned char *mem = src;
 
 	if (src)
 	{

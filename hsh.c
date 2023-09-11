@@ -1,12 +1,11 @@
 #include "hsh.h"
 
 /**
- * main - Entry point.
- * @argc: The argument count.
- * @argv: The argument vector.
- * Return: Always 0 (Sucess).
+ * main - entry point of programme
+ * @argc: argc
+ * @argv: argv
+ * Return: Always 0
  */
-
 int main(int argc, char **argv)
 {
 	info_t *info = init_info(argc, argv);
@@ -24,7 +23,6 @@ int main(int argc, char **argv)
 		free(info->line);
 		info->line = NULL;
 	}
-
 	if (info->interactive)
 	{
 		write(STDOUT_FILENO, "\n", 1);

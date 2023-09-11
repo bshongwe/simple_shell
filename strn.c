@@ -9,7 +9,7 @@
  */
 char *_strncpy(char *dest, const char *src, size_t n)
 {
-	char *post = dest;
+	char *pos = dest;
 
 	for ( ; n && *src; --n)
 	{

@@ -6,7 +6,7 @@
  * Return: Nothing.
  */
 
-void remove_comments(cmdlisr_t *cmd)
+void remove_comments(cmdlist_t *cmd)
 {
 	char **tokens, **new, *tmp;
 

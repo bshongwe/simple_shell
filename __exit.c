@@ -15,7 +15,7 @@ int __exit(info_t *info)
 			info->status = atou(*args);
 		else
 		{
-			perrorl_default(*info->arg, info->lineno, *args,
+			perrorl_default(*info->argv, info->lineno, *args,
 					*info->tokens, "Illegal number", NULL);
 			info->status = 2;
 
@@ -24,7 +24,7 @@ int __exit(info_t *info)
 	}
 	if (info->file)
 	{
-		close(info(info->fileno));
+		close(info->fileno);
 	}
 
 	exit(free_info(info));

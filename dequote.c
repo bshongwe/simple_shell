@@ -46,6 +46,6 @@ char *dequote(const char *str)
 		str += state_len;
 		str += (*str && (state & (QUOTE_DOUBLE | QUOTE_SINGLE)));
 	}
-	new[len] = '\0'
-		return (new);
+	new[len] = '\0';
+	return (new);
 }

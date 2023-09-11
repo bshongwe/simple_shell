@@ -13,35 +13,38 @@ char *_getline(const int fd)
 	ssize_t eol = 0, n_read = 0;
 	buf_t *buf = _getline_buf(&table, fd);
 
-	if (fcntl(fd, F_GETFL) == -1)
-		return (NULL);
-	if (buf == NULL)
-		return (NULL);
-	else if (buf->remaining == 0)
-		buf->next = buf->buffer;
-	do {
-		if (buf->remaining != 0)
-		{
-			eol = _memchr(buf->next, '\n', buf->remaining);
-			buf_t *gln = _getline_next(buf, &line, &size, buf->remaining);
-
-			if (eol == -1 && (*gln) != NULL)
-				buf->next += buf->remaining, buf->remaining = 0;
-			else if (_getline_next(buf, &line, &size, eol + 1) != NULL)
-				buf->next += eol + 1, buf->remaining -= eol + 1;
-			else
-				return (NULL);
-		}
-		n_read = read(fd, buf->buffer, GETLINE_BUFFER_SIZE);
+	if (buf)
+	{
+		do {
+			if (buf->remaining == 0)
+				buf->next = buf->buffer;
+			if (n_read)
+				buf->remaining = n_read;
+			if (buf->remaining)
+			{
+				eol = _memchr(buf->next, '\n', buf->remaining);
+				if (eol == -1)
+				{
+					if (_getline_next(buf, &line, &size, buf->remaining))
+						buf->next += buf->remaining, buf->remaining = 0;
+					else
+						break;
+				}
+				else
+				{
+					if (_getline_next(buf, &line, &size, eol + 1))
+						buf->next += eol + 1, buf->remaining -= eol + 1;
+					break;
+				}
+			}
+		} while ((n_read = read(fd, buf->buffer, GETLINE_BUFFER_SIZE)) > 0);
 		if (n_read == -1)
 		{
 			free(line);
-			*line = NULL;
+			line = NULL;
 			size = 0;
 		}
-		else
-			buf->remaining = n_read;
-	} while (n_read > 0);
+	}
 	return (line);
 }
 
@@ -53,40 +56,41 @@ char *_getline(const int fd)
  */
 static buf_t *_getline_buf(buf_table_t *table, const int fd)
 {
-	size_t index = fd % GETLINE_TABLE_SIZE;
 	buf_table_node_t *item = NULL;
+	size_t index = fd % GETLINE_TABLE_SIZE;
 
-	for (index = 0; index < GETLINE_TABLE_SIZE; index++)
+	if (table)
 	{
-		if (table != NULL && fd < 0)
+		if (fd < 0)
 		{
-			while ((item = ((*table)[index])) != NULL)
+			for (index = 0; index < GETLINE_TABLE_SIZE; index += 1)
 			{
-				item = item->next;
-				free(item);
+				while ((item = (*table)[index]))
+				{
+					(*table)[index] = item->next;
+					free(item);
+				}
 			}
 		}
-
-		if (item == NULL)
+		else
 		{
-			item = malloc(sizeof(*item));
-		}
-
-		if (item != NULL)
-		{
-			item->fd = fd;
-			item->buf.next = NULL;
-			item->bufremaining = 0;
-			item->next = (*table)[index];
-			(*table)[index] = item;
-		}
-
-		while (item && item->fd != fd)
-		{
-			item = item->next;
+			item = (*table)[index];
+			while (item && item->fd != fd)
+				item = item->next;
+			if (item == NULL)
+			{
+				item = malloc(sizeof(*item));
+				if (item)
+				{
+					item->fd = fd;
+					item->buf.next = NULL;
+					item->buf.remaining = 0;
+					item->next = (*table)[index];
+					(*table)[index] = item;
+				}
+			}
 		}
 	}
-
 	return (item ? &item->buf : NULL);
 }
 
@@ -98,13 +102,13 @@ static buf_t *_getline_buf(buf_table_t *table, const int fd)
  * @n: buffer char copies
  * Return: input line pointer (Success), memcpy fail (NULL)
  */
-static char *_getline_next(buf, char **line, size_t *size, size_t n)
+static char *_getline_next(buf_t *buf, char **line, size_t *size, size_t n)
 {
-	char *tem = NULL;
+	char *temp = NULL;
 
 	if (*line)
 	{
-		temp = realloc(*line, *size, *size + n);
+		temp = _realloc(*line, *size, *size + n);
 	}
 	else
 		temp = malloc(n + 1);
@@ -139,7 +143,7 @@ static char *_getline_next(buf, char **line, size_t *size, size_t n)
  * @new_size: new buffer size
  * Return: new  buffer pointer (Success), memcpy fail (Null)
  */
-static void *_realloc(void *old, size_t old_size, size, size_t new_size)
+static void *_realloc(void *old, size_t old_size, size_t new_size)
 {
 	void *new = NULL;
 
@@ -149,11 +153,15 @@ static void *_realloc(void *old, size_t old_size, size, size_t new_size)
 		{
 			new = malloc(new_size);
 			if (new)
+			{
 				_memcpy(new, old, old_size < new_size ? old_size : new_size);
-			free(old);
+				free(old);
+			}
 		}
 		else
+		{
 			free(old);
+		}
 	}
 	return (new);
 }

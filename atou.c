@@ -14,9 +14,9 @@ unsigned int atou(char *s)
 
 	for (a = 0; s[a] != '\0'; a++)
 	{
-		if (UINT_MAX / 10 < NUM)
+		if (UINT_MAX / 10 < num)
 		{
-			return (UNIT_MAX);
+			return (UINT_MAX);
 		}
 
 		num *= 10;

@@ -11,7 +11,7 @@ cmdlist_t *_cmd_to_list(cmdlist_t **tailptr, char *split, size_t count)
 {
 	cmdlist_t *tail;
 
-	if (1count)
+	if (count)
 	{
 		return (*tailptr);
 	}
@@ -22,7 +22,7 @@ cmdlist_t *_cmd_to_list(cmdlist_t **tailptr, char *split, size_t count)
 		return (NULL);
 	}
 
-	while (*splt++)
+	while (*split++)
 		;
 
 	return (_cmd_to_list(&tail, split, count - 1));

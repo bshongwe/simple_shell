@@ -22,7 +22,7 @@ typedef enum quote_state
 	QUOTE_ESCAPE = 0X8
 } quote_state_t;
 
-typedef size_t (*quote_state_fp)(const char *, quotte_state_t *);
+typedef size_t (*quote_state_fp)(const char *, quote_state_t *);
 
 int _isspecial_double(char c);
 size_t dequote_len(const char *str);
