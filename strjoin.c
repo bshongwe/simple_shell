@@ -73,3 +73,45 @@ char *strjoin(size_t *n, const char *sep, const char *pre, const char *suf)
 	}
 	return (dest);
 }
+
+/**
+ * strjoina - func joins string from array
+ * @n: len of new string address
+ * @spe: joining string
+ * @array: array of strings
+ * Return: new string pointer
+ */
+char *strjoina(size_t *n, const char *sep, const char **array)
+{
+	char *dest = NULL;
+	size_t len = 0, idx = 0, sep_len = _strlen(sep ? sep : "");
+
+	while (array[idx])
+	{
+		len += _strlen(array[idx++]);
+	}
+
+	if (idx--)
+	{
+		dest = malloc(sizeof(char) * (len + idx * sep_len + 1));
+		if (dest)
+		{
+			len = 0;
+			while (*array)
+			{
+				_strcpy(dest + len, *array);
+				len += _strlen(*array);
+				if (sep_len && idx--)
+				{
+					_strcpy(dest + len, sep);
+					len += sep_len;
+				}
+			}
+			if (n)
+			{
+				*n = len + 1;
+			}
+		}
+	}
+	return (dest);
+}
