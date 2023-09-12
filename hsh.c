@@ -1,7 +1,7 @@
 #include "hsh.h"
 
 /**
- * main - entry point of programme
+ * main - entry point of shell programme
  * @argc: argc
  * @argv: argv
  * Return: Always 0

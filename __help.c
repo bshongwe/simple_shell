@@ -9,8 +9,8 @@ int __help(struct info *info)
 {
 	size_t len = 0;
 	const builtin_t *bp = NULL;
+	char * const *args = info->tokens + 1;
 	const char *desc = NULL;
-	const char *args = NULL;
 
 	if (*args)
 	{
@@ -35,8 +35,8 @@ int __help(struct info *info)
 			args += 1;
 		}
 		if (info->status == EXIT_FAILURE)
-			perrorl_default(*info->argv,
-					info->lineno, "No matching topics", *info->tokens,	*(args - 1), NULL);
+			perrorl_default(*info->argv, info->lineno, "no topics match",
+					*info->tokens, *(args - 1), NULL);
 		return (info->status);
 	}
 	info->status = EXIT_SUCCESS;

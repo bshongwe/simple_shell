@@ -32,8 +32,8 @@ int free_info(info_t *info)
  */
 info_t *init_info(int argc, char **argv)
 {
-	char *error = NULL;
 	static info_t info;
+	char *error = NULL;
 
 	info.argc = argc;
 	info.argv = argv;
@@ -44,7 +44,7 @@ info_t *init_info(int argc, char **argv)
 		info.fileno = open(info.file, O_RDONLY);
 		if (info.fileno == -1)
 		{
-			error = strjoin(NULL, " ", "Can not open", info.file);
+			error = strjoin(NULL, " ", "Can't open", info.file);
 			perrorl_default(*argv, info.lineno, error, NULL);
 			free(error);
 			info.status = 127;

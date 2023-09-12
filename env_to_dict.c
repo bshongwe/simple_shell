@@ -8,9 +8,9 @@
  */
 env_t *_env_to_dict(env_t **tailptr, char **env)
 {
+	env_t *tail;
 	char *env_str;
 	ssize_t key_len;
-	env_t *tail;
 
 	if (!*env)
 	{
@@ -24,6 +24,7 @@ env_t *_env_to_dict(env_t **tailptr, char **env)
 	}
 
 	key_len = _strchr(*env, '=');
+
 	if (key_len == -1)
 	{
 		return (NULL);

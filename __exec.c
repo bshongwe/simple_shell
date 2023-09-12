@@ -9,7 +9,7 @@ int __exec(info_t *info)
 {
 	char *exe, **args = info->tokens + 1, **env = NULL;
 
-	if (!args)
+	if (!*args)
 		return ((info->status = EXIT_SUCCESS));
 
 	info->tokens = args;
@@ -22,7 +22,9 @@ int __exec(info_t *info)
 		exe = search_path(info, info->path);
 	}
 	else
+	{
 		exe = _strdup(*args);
+	}
 	info->tokens -= 1;
 
 	if (access(exe, X_OK) == 0)
@@ -30,17 +32,16 @@ int __exec(info_t *info)
 		env = dict_to_env(info->env);
 
 		free_info(info);
-		exexve(exe, args, env);
-		pperrorl_default(*info->argv, info->lineno,
-				"RES: Not found", *info->tokens, *args, NULL);
+		execve(exe, args, env);
+		perrorl_default(*info->argv, info->lineno, "not found",
+				*info->tokens, *args, NULL);
 		free(exe);
 		free_tokens(&args);
 		free_tokens(&env);
 		exit(127);
 	}
-	perrorl_default(*info->argv, info->lineno,
-			"RES: Permission denied", *info->tokens, *args, NULL);
-
+	perrorl_default(*info->argv, info->lineno, "permission denied",
+			*info->tokens, *args, NULL);
 	free(exe);
 	free_tokens(&args);
 	free_info(info);

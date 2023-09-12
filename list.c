@@ -7,7 +7,7 @@
  */
 void free_list(list_t **headptr)
 {
-	if (!*headptrr)
+	if (!*headptr)
 	{
 		return;
 	}
@@ -29,17 +29,12 @@ list_t *str_to_list(const char *str, char delim)
 {
 	list_t *head = NULL;
 
-	if (str == NULL)
+	if (!str)
 	{
 		return (NULL);
 	}
 
-	if (delim == NULL)
-	{
-		return (NULL);
-	}
-
-	if (_str_to_list(&head, str, delim) == NULL)
+	if (!_str_to_list(&head, str, delim))
 	{
 		free_list(&head);
 	}
@@ -92,7 +87,9 @@ list_t *add_node_end(list_t **headptr, const char *str)
 	}
 
 	if (*headptr)
+	{
 		return (add_node_end(&((*headptr)->next), str));
+	}
 
 	new = malloc(sizeof(list_t));
 	if (!new)
@@ -127,19 +124,20 @@ list_t *_str_to_list(list_t **tailptr, const char *str, char delim)
 	}
 
 	tail = add_node_end(tailptr, NULL);
-	if (tail == NULL)
+	if (!tail)
 	{
 		return (NULL);
 	}
 
 	tail->str = _memdup(str, len + 1);
-	if (tail->str == NULL)
+	if (!tail->str)
 	{
 		return (NULL);
 	}
 
 	tail->str[len] = '\0';
-	if (str[len] != NULL)
+
+	if (str[len])
 	{
 		return (_str_to_list(&tail, str + len + 1, delim));
 	}

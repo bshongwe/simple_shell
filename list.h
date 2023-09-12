@@ -6,7 +6,7 @@
 #include "string.h"
 #include "types.h"
 
-/* STRUCTS */
+/* STRUCT */
 /**
  * struct list - Singly linked list.
  * @str: A dynamically-allocated string.
@@ -19,7 +19,6 @@ struct list
 };
 
 /* PROTOTYPES */
-
 list_t *str_to_list(const char *str, char delim);
 list_t *_str_to_list(list_t **tailptr, const char *str, char delim);
 list_t *add_node(list_t **headptr, const char *str);

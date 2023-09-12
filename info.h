@@ -21,12 +21,11 @@ extern char **environ;
  * @fileno: args passed
  * @file: args passed
  * @line: args passed
+ * @lineno: args passed
  * @env: args passed
  * @path: args passed
  * @aliases: args passed
  * @commands: args passed
- * @line: args passed
- * @lineno: args passed
  * @tokens: args passed
  * @cwd: args passed
  * @argc: args passed
@@ -34,6 +33,7 @@ extern char **environ;
  * @exe: args passed
  * @status: args passed
  * @history: args passed
+ * @pid: args passed
  * @interactive: args passed
  */
 struct info

@@ -1,8 +1,7 @@
-#ifndef SHELL_H
-#define SHELL_H
+#ifndef HSH_H
+#define HSH_H
 
 /* LIBRARIES */
-
 #include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -13,7 +12,6 @@
 #include <fcntl.h>
 
 /* CUSTOM_LIBRARIES */
-
 #include "alias.h"
 #include "builtins.h"
 #include "command.h"
@@ -30,11 +28,9 @@
 #include "types.h"
 
 /* GLOBAL_VARIABLES */
-
 extern char **environ;
 
 /* PROTOTYPES */
-
 bool read_input(info_t *info);
 quote_state_t _read_input(char **lineptr, int fd);
 int parse(info_t *info);

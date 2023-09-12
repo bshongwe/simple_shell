@@ -1,7 +1,7 @@
 #include "string.h"
 
 /**
- * _memset - func fill specific mem with specific value
+ * _memset - func fills specific mem with specific value
  * @dest: specific mem init pointer
  * @chr: source value in specific mem
  * @n: mem size to fill

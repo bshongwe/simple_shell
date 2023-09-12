@@ -10,6 +10,9 @@
 #include "string.h"
 #include <stdlib.h>
 
+#define GETLINE_TABLE_SIZE 127
+#define GETLINE_BUFFER_SIZE 4096
+
 /**
  * struct buf_table_node_s - struct for hash table input buffer
  * @fd: file descriptor
@@ -36,8 +39,9 @@ typedef struct buf_s
 	size_t remaining;
 } buf_t;
 
-/* Prototypes */
 typedef buf_table_node_t *buf_table_t[GETLINE_TABLE_SIZE];
+
+/* Prototypes */
 char *_getline(const int fd);
 
 #endif /* _ end of GETLINE_H file */
