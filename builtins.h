@@ -57,6 +57,20 @@
 	"If VALUE ends with a space, next word will be expanded.\0"			\
 	"\0"
 
+#define EXEC_HELP "exec COMMAND [ARGS ...]"
+#define EXEC_DESC								\
+	"Replace shell with given command.\n\0"				\
+	"COMMAND is executed, replacing the executing shell.\0"			\
+	"ARGS are passed as positional arguments to COMMAND.\0"			\
+	"If the command cannot be executed, the shell exits.\0"			\
+	"\0"
+
+#define HELP_HELP "help [BUILTIN]"
+#define HELP_DESC								\
+	"Display information about builtin commands.\n\0"			\
+	"If BUILTIN is omitted, the available commands are displayed.\0"	\
+	"\0"
+
 /* Builtin Struct */
 typedef int (*builtin_fp)(info_t *);
 
@@ -87,5 +101,7 @@ int __cd(info_t *info);
 int __alias(info_t *info);
 int __help(info_t *info);
 int __alias(info_t *info);
+int __exec(info_t *info);
+int __history(info_t *info);
 
 #endif /* end of BUILTINS_H file */

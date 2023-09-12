@@ -3,6 +3,8 @@
 
 #include "dict.h"
 #include <stdlib.h>
+#include "strings.h"
+#include "types.h"
 
 typedef dict_t env_t;
 

@@ -25,8 +25,8 @@ char **dict_to_env(env_t *head)
 	for (len = 0; head; head = head->next)
 	{
 		env[len++] = strjoin(NULL, "=", head->key, head->val);
-		env[len] = NULL;
 	}
+	env[len] = NULL;
 
 	return (env);
 }

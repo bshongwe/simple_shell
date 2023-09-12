@@ -1,14 +1,14 @@
 #include "builtins.h"
 
 /**
- * __alias - func creates and prints aliases to screen
+ * __alias - func creates and displays aliases
  * @info: struct for shell info
  * Return: status (Success)
  */
 int __alias(info_t *info)
 {
-	char *name, **args = info->tokens + 1;
 	alias_t *alias;
+	char *name, **args = info->tokens + 1;
 	ssize_t name_len;
 
 	info->status = EXIT_SUCCESS;
@@ -20,7 +20,9 @@ int __alias(info_t *info)
 			{
 				alias = get_dict_node(info->aliases, *args);
 				if (alias)
+				{
 					__alias_print(alias);
+				}
 				else
 				{
 					perrorl("not found", *info->tokens, *args, NULL);
@@ -52,7 +54,7 @@ void __alias_print(alias_t *alias)
 {
 	write(STDOUT_FILENO, alias->key, _strlen(alias->key));
 	write(STDOUT_FILENO, "='", 2);
-	write(STDOUT_FILENO, alias->val, _trlen(alias->val));
+	write(STDOUT_FILENO, alias->val, _strlen(alias->val));
 	write(STDOUT_FILENO, "'\n", 2);
 }
 
@@ -69,8 +71,8 @@ void __alias_add(alias_t **aliases, const char *name, const char *value)
 
 	if (alias)
 	{
-		alias->val = _strdup(value);
 		free(alias->val);
+		alias->val = _strdup(value);
 	}
 	else
 	{

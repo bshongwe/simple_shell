@@ -53,7 +53,7 @@ int __cd(info_t *info)
  */
 void __cd_error(info_t *info, char *dir)
 {
-	char *error = strjoin(NULL, " ", "can not cd to", dir);
+	char *error = strjoin(NULL, " ", "Can not cd to", dir);
 
 	perrorl_default(*info->argv, info->lineno, error, *info->tokens, NULL);
 

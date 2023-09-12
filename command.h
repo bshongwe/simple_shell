@@ -5,7 +5,7 @@
 #include "string.h"
 #include <stdlib.h>
 #include "tokens.h"
-#include "types.h"
+#include "quote.h"
 
 /**
  * struct cmdlist - func for link list cmds
