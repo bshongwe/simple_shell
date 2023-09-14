@@ -1,10 +1,10 @@
 #include "tokens.h"
 
 /**
- * arrjoin - func joins arr1 and arr2 and prints a dynam-alloc array
- * @arr1: input array
- * @arr2: input array
- * Return: dynam-alloc array of arr1 and arr2 elements
+ * arrjoin - func joins arr1 with arr2
+ * @arr1: array input 1
+ * @arr2: array input 2
+ * Return: dynamically-allocated array of arr1 and arr2 elements
  */
 char **arrjoin(char **arr1, char **arr2)
 {
@@ -23,9 +23,7 @@ char **arrjoin(char **arr1, char **arr2)
 	}
 	new = malloc(sizeof(char *) * (arr1_len + arr2_len + 1));
 	if (!new)
-	{
 		return (NULL);
-	}
 
 	new_len = 0;
 	if (arr1)

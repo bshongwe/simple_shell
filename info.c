@@ -1,34 +1,13 @@
 #include "info.h"
-#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <fcntl.h>
 
 /**
- * free_info - func frees and nulls dynam-alloc info
- * @info: info pointer
- * Return: exit status (Success)
- */
-int free_info(info_t *info)
-{
-	free(info->line);
-	info->line = _getline(-1);
-	free_tokens(&info->tokens);
-	free(info->cwd);
-	info->cwd = NULL;
-	free(info->exe);
-	info->exe = NULL;
-	free_dict(&info->env);
-	free_list(&info->path);
-	free_dict(&info->aliases);
-	free_cmdlist(&info->commands);
-	return (info->status);
-}
-
-/**
- * init_info - func invokes shell info
+ * init_info - func initialize shell info
  * @argc: arg count
  * @argv: arg values
- * Return: info pointer
+ * Return: pointer to the info
  */
 info_t *init_info(int argc, char **argv)
 {
@@ -56,4 +35,25 @@ info_t *init_info(int argc, char **argv)
 	info.cwd = getcwd(NULL, 0);
 	info.env = env_to_dict(environ);
 	return (&info);
+}
+
+/**
+ * free_info - func frees and nullies dynamically allocated info
+ * @info: info pointer
+ * Return: current exit status
+ */
+int free_info(info_t *info)
+{
+	free(info->line);
+	info->line = _getline(-1);
+	free_tokens(&info->tokens);
+	free(info->cwd);
+	info->cwd = NULL;
+	free(info->exe);
+	info->exe = NULL;
+	free_dict(&info->env);
+	free_list(&info->path);
+	free_dict(&info->aliases);
+	free_cmdlist(&info->commands);
+	return (info->status);
 }

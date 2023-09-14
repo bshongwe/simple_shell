@@ -1,36 +1,17 @@
-#ifndef GETLINE_H
-#define GETLINE_H
+#ifndef _GETLINE_H_
+#define _GETLINE_H_
 
-/* Struct defs */
-#define GETLINE_TABLE_SIZE 127
-#define GETLINE_BUFFER_SIZE 4096
-
-/*Getline Libraries */
-#include <unistd.h>
-#include "string.h"
 #include <stdlib.h>
+#include "string.h"
+#include <unistd.h>
 
-#define GETLINE_TABLE_SIZE 127
 #define GETLINE_BUFFER_SIZE 4096
 
 /**
- * struct buf_table_node_s - struct for hash table input buffer
- * @fd: file descriptor
- * @buf: specific buffer reference
- * @next: specific consequent buffer in chain
- */
-typedef struct buf_table_node_s
-{
-	int fd;
-	struct buf_s buf;
-	struct buf_table_node_s *next;
-} buf_table_node_t;
-
-/**
- * struct buf_s - struct for input buffer
- * @buffer: memory buffer allocation
- * @next: next value pointer
- * @remaining: remaining num values
+ * struct buf_s - input buffer
+ * @buffer: the buffer
+ * @next: pointer to the next value
+ * @remaining: number of values remaining
  */
 typedef struct buf_s
 {
@@ -39,9 +20,23 @@ typedef struct buf_s
 	size_t remaining;
 } buf_t;
 
+#define GETLINE_TABLE_SIZE 127
+
+/**
+ * struct buf_table_node_s - input buffer hash table
+ * @fd: file descriptor
+ * @buf: associated buffer
+ * @next: next buffer in chain
+ */
+typedef struct buf_table_node_s
+{
+	int fd;
+	struct buf_s buf;
+	struct buf_table_node_s *next;
+} buf_table_node_t;
+
 typedef buf_table_node_t *buf_table_t[GETLINE_TABLE_SIZE];
 
-/* Prototypes */
 char *_getline(const int fd);
 
-#endif /* _ end of GETLINE_H file */
+#endif /* end of _GETLINE_H_ file */

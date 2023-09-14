@@ -1,51 +1,10 @@
 #include "error.h"
 
 /**
- * perrorl_default - func prints formatted standard error
- * @arg0: arg vector
- * @lineno: programme line number
- * @msg: message error report
- * @...: prepend context string list
- * Return: void
- */
-void perrorl_default(const char *arg0, size_t lineno, const char *msg, ...)
-{
-	char *linenostr = num_to_str(lineno);
-	const char *str = NULL;
-	va_list ap;
-
-	if (arg0)
-	{
-		write(STDERR_FILENO, arg0, _strlen(arg0));
-	}
-	write(STDERR_FILENO, ": ", 2);
-
-	if (linenostr)
-	{
-		write(STDERR_FILENO, linenostr, _strlen(linenostr));
-	}
-	write(STDERR_FILENO, ": ", 2);
-
-	va_start(ap, msg);
-	while ((str = va_arg(ap, char *)))
-	{
-		write(STDERR_FILENO, str, _strlen(str));
-		write(STDERR_FILENO, ": ", 2);
-	}
-	va_end(ap);
-
-	if (msg)
-		write(STDERR_FILENO, msg, _strlen(msg));
-	write(STDERR_FILENO, "\n", 1);
-	free(linenostr);
-}
-
-/**
- * perrorl - func prints formatted standarderror message
- * @msg: message error report
- * @...: prepend context string list
- * Return: void
- */
+  * perrorl - print a formatted message to standard error
+  * @msg: error message
+  * @...: NULL-terminated list of context strings to prepend
+  */
 void perrorl(const char *msg, ...)
 {
 	const char *str;
@@ -62,4 +21,40 @@ void perrorl(const char *msg, ...)
 	if (msg)
 		write(STDERR_FILENO, msg, _strlen(msg));
 	write(STDERR_FILENO, "\n", 1);
+}
+
+/**
+  * perrorl_default - func prints formatted message to std error
+  * @arg0: argv
+  * @lineno: line num
+  * @msg: error message
+  * @...: NULL-terminated list of context strings to prepend
+  * Return: void
+  */
+void perrorl_default(const char *arg0, size_t lineno, const char *msg, ...)
+{
+	char *linenostr = num_to_str(lineno);
+	const char *str = NULL;
+	va_list ap;
+
+	if (arg0)
+		write(STDERR_FILENO, arg0, _strlen(arg0));
+	write(STDERR_FILENO, ": ", 2);
+
+	if (linenostr)
+		write(STDERR_FILENO, linenostr, _strlen(linenostr));
+	write(STDERR_FILENO, ": ", 2);
+
+	va_start(ap, msg);
+	while ((str = va_arg(ap, char *)))
+	{
+		write(STDERR_FILENO, str, _strlen(str));
+		write(STDERR_FILENO, ": ", 2);
+	}
+	va_end(ap);
+
+	if (msg)
+		write(STDERR_FILENO, msg, _strlen(msg));
+	write(STDERR_FILENO, "\n", 1);
+	free(linenostr);
 }

@@ -1,11 +1,10 @@
 #include "hsh.h"
 
 /**
- * _sigint - Reprompts.
- * @signal: Signal passed.
- * Return: Nothing.
- */
-
+  * _sigint -  func reprompts
+  * @signal: signal passed
+  * Return: void
+  */
 void _sigint(int signal __attribute__((unused)))
 {
 	fflush(STDIN_FILENO);

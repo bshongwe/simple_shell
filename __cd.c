@@ -1,8 +1,8 @@
 #include "builtins.h"
 
 /**
- * __cd - func for changing directory
- * @info: args
+ * __cd - func changes the directory
+ * @info: arguments passed
  * Return: int status
  */
 int __cd(info_t *info)
@@ -46,31 +46,14 @@ int __cd(info_t *info)
 }
 
 /**
- * __cd_error - func print error when __cd fails
- * @info: shell info
- * @dir: relevant directory
- * Return: void
- */
-void __cd_error(info_t *info, char *dir)
-{
-	char *error = strjoin(NULL, " ", "Can not cd to", dir);
-
-	perrorl_default(*info->argv, info->lineno, error, *info->tokens, NULL);
-
-	info->status = 2;
-
-	free(error);
-}
-
-/**
- * __cd_success - func updates env on succesful __cd
+ * __cd_success - func updates env
  * @info: shell info
  * Return: void
  */
 void __cd_success(info_t *info)
 {
-	char *setenv_tokens[] = {"setenv", NULL, NULL, NULL};
 	char **tokens = info->tokens;
+	char *setenv_tokens[] = {"setenv", NULL, NULL, NULL};
 
 	info->tokens = setenv_tokens;
 
@@ -90,4 +73,21 @@ void __cd_success(info_t *info)
 	info->tokens = tokens;
 
 	info->status = EXIT_SUCCESS;
+}
+
+/**
+ * __cd_error - func prints error upon failure to cd
+ * @info: shell info
+ * @dir: directory
+ * Return: void
+ */
+void __cd_error(info_t *info, char *dir)
+{
+	char *error = strjoin(NULL, " ", "can't cd to", dir);
+
+	perrorl_default(*info->argv, info->lineno, error, *info->tokens, NULL);
+
+	info->status = 2;
+
+	free(error);
 }

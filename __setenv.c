@@ -1,14 +1,14 @@
 #include "builtins.h"
 
 /**
- * __setenv - func set env vars and returns info->status
- * @info: args
- * Return: status (Success)
+ * __setenv - func sets env vars
+ * @info: arguments passed
+ * Return: status
  */
 int __setenv(info_t *info)
 {
-	char **args = info->tokens + 1, val;
 	env_t *var;
+	char **args = info->tokens + 1, *val;
 
 	if (args[0])
 	{
@@ -16,7 +16,7 @@ int __setenv(info_t *info)
 		{
 			if (args[2])
 			{
-				perrorl("Excessive arguments.", *info->tokens, NULL);
+				perrorl("Too many arguments.", *info->tokens, NULL);
 				info->status = EXIT_FAILURE;
 				return (info->status);
 			}
@@ -33,10 +33,14 @@ int __setenv(info_t *info)
 			var->val = _strdup(val);
 		}
 		else
+		{
 			add_dict_node_end(&info->env, args[0], val);
+		}
 		info->status = EXIT_SUCCESS;
 	}
 	else
+	{
 		__env(info);
+	}
 	return (info->status);
 }

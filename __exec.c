@@ -1,9 +1,9 @@
 #include "builtins.h"
 
 /**
- * __exec - func loads new program after replacing running shell
- * @info: args
- * Return: int exit status (Success)
+ * __exec - func replaces running shell with new program
+ * @info: args passed
+ * Return: int
  */
 int __exec(info_t *info)
 {
@@ -33,14 +33,14 @@ int __exec(info_t *info)
 
 		free_info(info);
 		execve(exe, args, env);
-		perrorl_default(*info->argv, info->lineno, "not found",
+		perrorl_default(*info->argv, info->lineno, "Not found",
 				*info->tokens, *args, NULL);
 		free(exe);
 		free_tokens(&args);
 		free_tokens(&env);
 		exit(127);
 	}
-	perrorl_default(*info->argv, info->lineno, "permission denied",
+	perrorl_default(*info->argv, info->lineno, "Permission denied",
 			*info->tokens, *args, NULL);
 	free(exe);
 	free_tokens(&args);

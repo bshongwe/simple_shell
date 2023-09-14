@@ -2,14 +2,14 @@
 
 /**
  * tokenize - func splits string into tokens and dequote
- * @str: input string to tokenize
- * Return: string array tokens (Success), fail (0),
- * no tokens (NULL)
+ * @str: string input
+ * Return: if malloc fails or if str is 0 or contains no tokens, return NULL,
+ * otherwise, return array containing the tokens in str, terminated by NULL
  */
 char **tokenize(const char *str)
 {
-	const char *tok;
 	char **tokens;
+	const char *tok;
 	size_t count;
 	quote_state_t state;
 
@@ -49,51 +49,49 @@ char **tokenize(const char *str)
 }
 
 /**
- * free_tokens - func free string array from memory
- * @tokens: tokens array pointer
- * Return: void
+ * count_tokens - func computes string len after dequoting
+ * @str: string input
+ * Return: Return str len after dequoting
  */
-void free_tokens(char ***tokens)
+size_t count_tokens(const char *str)
 {
-	char **tok;
+	size_t count;
+	quote_state_t state;
 
-	if (!tokens)
+	for (count = 0; *(str += quote_state_len(str, QUOTE_NONE)); ++count)
 	{
-		return;
+		while (*str && (state = quote_state(*str)) != QUOTE_NONE)
+		{
+			if (state & (QUOTE_DOUBLE | QUOTE_SINGLE | QUOTE_ESCAPE))
+				str += quote_state_len(str + 1, state) + 1;
+			else
+				str += quote_state_len(str, state);
+
+			if (*str && (state & (QUOTE_DOUBLE | QUOTE_SINGLE)))
+				++str;
+		}
 	}
-
-	tok = *tokens;
-
-	if (!tok)
-	{
-		free(*tok++);
-	}
-	free(*tokens);
-
-	*tokens = NULL;
+	return (count);
 }
 
 /**
  * tokenize_noquote - func splits string into tokens
- * @str: input string
- * Return: tokens string array (Success), malloc fail (NULL)
+ * @str: string input
+ * Return: if malloc fails or if str is 0 or contains no tokens, return NULL
+ * otherwise, return an array containing the tokens in str, terminated by NULL
  */
 char **tokenize_noquote(const char *str)
 {
-	const char *tok;
 	char **tokens;
+	const char *tok;
 	size_t count;
 
 	if (!str)
-	{
 		return (NULL);
-	}
 
-	tokens = malloc(sizeof(char *) * (count_token_noquote(str) + 1));
+	tokens = malloc(sizeof(char *) * (count_tokens_noquote(str) + 1));
 	if (!tokens)
-	{
 		return (NULL);
-	}
 
 	for (count = 0; *str; ++count)
 	{
@@ -107,7 +105,7 @@ char **tokenize_noquote(const char *str)
 			++str;
 		} while (*str && !_isspace(*str));
 
-		tokens[count] = memdup(tok, str - tok + 1);
+		tokens[count] = _memdup(tok, str - tok + 1);
 		if (!tokens[count])
 		{
 			free_tokens(&tokens);
@@ -121,33 +119,46 @@ char **tokenize_noquote(const char *str)
 }
 
 /**
- * count_tokens - func counts num of tokens in str after dequote
- * @str: input string
- * Return: str len (count)
+ * count_tokens_noquote - func counts words in string
+ * @str: string input
+ * Return: if str is NULL, return -1, otherwise, return
+ * number of words in str
  */
-size_t count_tokens(const char *str)
+size_t count_tokens_noquote(const char *str)
 {
-	size_t count;
-	quote_state_t state;
+	size_t tok_count;
 
-	for (count = 0; *(str += quote_state_len(str, QUOTE_NONE)); ++count)
+	for (tok_count = 0; *str; ++tok_count)
 	{
-		while (*str && (state = quote_state(*str)) != QUOTE_NONE)
-		{
-			if (state & (QUOTE_DOUBLE | QUOTE_SINGLE | QUOTE_ESCAPE))
-			{
-				str += quote_state_len(str + 1, state) + 1;
-			}
-			else
-			{
-				str += quote_state_len(str, state);
-			}
-
-			if (*str && (state & (QUOTE_DOUBLE | QUOTE_SINGLE)))
-			{
-				++str;
-			}
-		}
+		while (_isspace(*str))
+			++str;
+		if (!*str)
+			break;
+		do {
+			++str;
+		} while (*str && !_isspace(*str));
 	}
-	return (count);
+	return (tok_count);
+}
+
+/**
+ * free_tokens - func frees and nullifies strings array
+ * @tokens: tokens array pointer
+ */
+void free_tokens(char ***tokens)
+{
+	char **tok;
+
+	if (!tokens)
+		return;
+
+	tok = *tokens;
+	if (!tok)
+		return;
+
+	while (*tok)
+		free(*tok++);
+	free(*tokens);
+
+	*tokens = NULL;
 }

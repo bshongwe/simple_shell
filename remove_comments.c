@@ -1,11 +1,10 @@
 #include "hsh.h"
 
 /**
- * remove_comments - Removes comments (#) from a command.
- * @cmd: Pointer to ther cmd process.
- * Return: Nothing.
+ * remove_comments - func removes comments (#) from cmd
+ * @cmd: cmd process pointer
+ * Return: void
  */
-
 void remove_comments(cmdlist_t *cmd)
 {
 	char **tokens, **new, *tmp;

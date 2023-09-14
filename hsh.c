@@ -1,9 +1,9 @@
 #include "hsh.h"
 
 /**
- * main - entry point of shell programme
- * @argc: argc
- * @argv: argv
+ * main - entry point of shell program
+ * @argc: argc passed
+ * @argv: argv passed
  * Return: Always 0
  */
 int main(int argc, char **argv)
@@ -24,14 +24,10 @@ int main(int argc, char **argv)
 		info->line = NULL;
 	}
 	if (info->interactive)
-	{
 		write(STDOUT_FILENO, "\n", 1);
-	}
 
 	if (info->file)
-	{
 		close(info->fileno);
-	}
 
 	exit(free_info(info));
 }

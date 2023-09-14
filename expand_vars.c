@@ -1,10 +1,9 @@
 #include "hsh.h"
 
 /**
- * expand_vars - func performs var exp on curr tokens sets
- * @info: shell info
- * @tokptr: current tokens pointer
- * Return: void
+ * expand_vars - func performs var expansion on current set of tokens
+ * @info: shell information
+  * @tokptr: current tokens pointer
  */
 void expand_vars(info_t *info, char ***tokptr)
 {
@@ -24,10 +23,10 @@ void expand_vars(info_t *info, char ***tokptr)
 }
 
 /**
- * _expand_vars - func performs var exp on token
- * @info: shell info
+ * _expand_vars - func performs var expansion on token
+ * @info: shell information
  * @tokptr: current tokens pointer
- * Return: expanded token (Success)
+ * Return: expanded token
  */
 char **_expand_vars(info_t *info, char ***tokptr)
 {

@@ -1,64 +1,65 @@
-#ifndef INFO_H
-#define INFO_H
+#ifndef _INFO_H_
+#define _INFO_H_
 
 #include <unistd.h>
 #include <stdlib.h>
-#include "env.h"
-#include "getline.h"
-#include "string.h"
-#include "types.h"
+#include <stddef.h>
+
 #include "command.h"
-#include "alias.h"
+#include "env.h"
 #include "error.h"
-#include "tokens.h"
+#include "getline.h"
 #include "history.h"
 #include "list.h"
+#include "string.h"
+#include "tokens.h"
+#include "types.h"
+#include "alias.h"
 
 extern char **environ;
 
 /**
- * struct info - shell state
- * @fileno: args passed
- * @file: args passed
- * @line: args passed
- * @lineno: args passed
- * @env: args passed
- * @path: args passed
- * @aliases: args passed
- * @commands: args passed
- * @tokens: args passed
- * @cwd: args passed
- * @argc: args passed
- * @argv: args passed
- * @exe: args passed
- * @status: args passed
- * @history: args passed
- * @pid: args passed
- * @interactive: args passed
- */
+  * struct info - shell state
+  * @interactive: arguments passed
+  * @argc: args passed
+  * @argv: args passed
+  * @file: args passed
+  * @fileno: args passed
+  * @status: args passed
+  * @line: args passed
+  * @lineno: args passed
+  * @tokens: args passed
+  * @pid: args passed
+  * @cwd: args passed
+  * @exe: args passed
+  * @env: args passed
+  * @path: args passed
+  * @aliases: args passed
+  * @history: args passed
+  * @commands: args passed
+  */
 struct info
 {
-	char *file;
-	int *fileno;
+	int interactive;
 	int argc;
+	char **argv;
+	char *file;
+	int fileno;
 	int status;
 	char *line;
-	char *cwd;
-	char **argv;
 	size_t lineno;
-	char *exe;
 	char **tokens;
 	pid_t pid;
-	int interactive;
+	char *cwd;
+	char *exe;
 	env_t *env;
 	list_t *path;
-	history_t *history;
 	alias_t *aliases;
+	history_t *history;
 	cmdlist_t *commands;
 };
 
 int free_info(info_t *info);
-info_t *intit_info(int argc, char **argv);
+info_t *init_info(int argc, char **argv);
 
-
-#endif /* end of INFO_H file */
+#endif /* end of _INFO_H_ file */

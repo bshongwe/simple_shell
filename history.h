@@ -1,15 +1,15 @@
-#ifndef HISTORY_H
-#define HISTORY_H
+#ifndef _HISTORY_H_
+#define _HISTORY_H_
 
-#include "types.h"
 #include "list.h"
+#include "types.h"
 
 /**
- * struct history - struct for shell cmd history
- * @head: history list head pointer
- * @filename: file signature in history
- * @n: history list entry count
- */
+  * struct history - shell command history
+  * @head: history list head pointer
+  * @filename: name of file history
+  * @n: the number of entries in the history list
+  */
 struct history
 {
 	struct list *head;

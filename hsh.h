@@ -1,5 +1,5 @@
-#ifndef HSH_H
-#define HSH_H
+#ifndef SHELL_H
+#define SHELL_H
 
 /* LIBRARIES */
 #include <stdbool.h>

@@ -1,0 +1,10 @@
+*
+!*/
+!.gitignore
+!AUTHORS
+!README.md
+!man_1_hsh
+!Makefile
+!*.[ch]
+
+.fake

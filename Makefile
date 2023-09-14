@@ -1,4 +1,4 @@
-C = gcc
+CC = gcc
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 NAME = hsh
@@ -7,16 +7,16 @@ RM = rm -f
 .PHONY: all clean oclean fclean re
 
 all: $(OBJ)
-        $(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 clean:
-        $(RM) *~
-        $(RM) *.swp
-        $(RM) $(NAME)
+	$(RM) *~
+	$(RM) *.swp
+	$(RM) $(NAME)
 oclean:
-        $(RM) $(OBJ)
+	$(RM) $(OBJ)
 fclean:
-        $(RM) *~
-        $(RM) *.swp
-        $(RM) $(NAME)
-        $(RM) $(OBJ)
+	$(RM) *~
+	$(RM) *.swp
+	$(RM) $(NAME)
+	$(RM) $(OBJ)
 re: fclean all

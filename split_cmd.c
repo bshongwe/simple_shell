@@ -8,7 +8,7 @@
 size_t split_cmd(char *cmd)
 {
 	size_t count = 1, state_len;
-	ssize_t sep_inde;
+	ssize_t sep_index;
 	quote_state_t state;
 
 	do {
@@ -21,7 +21,7 @@ size_t split_cmd(char *cmd)
 				if (sep_index != -1)
 				{
 					state_len = sep_index;
-					*(cmd++ + state_len) '\0';
+					*(cmd++ + state_len) = '\0';
 					++count;
 				}
 				cmd += state_len;

@@ -1,10 +1,10 @@
 #include "builtins.h"
 
 /**
- * __unsetenv - func sets env var
- * @info: args
- * Return: status (Success)
- */
+  * __unsetenv - func unsets env vars
+  * @info: arguments passed
+  * Return: status
+  */
 int __unsetenv(info_t *info)
 {
 	char **args = info->tokens + 1;
@@ -12,9 +12,7 @@ int __unsetenv(info_t *info)
 	if (*args)
 	{
 		while (*args)
-		{
 			del_dict_node(&info->env, *args++);
-		}
 		info->status = EXIT_SUCCESS;
 	}
 	else

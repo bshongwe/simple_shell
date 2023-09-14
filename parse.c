@@ -1,9 +1,10 @@
 #include "hsh.h"
 
 /**
- * parse - func parses input, expands aliases, vars and word split
- * @info: shell programme info
- * Return: final token num (Success)
+ * parse - parse input func expands aliases, variables
+ * and word splitting
+ * @info: shell information
+ * Return: final number of tokens
  */
 int parse(info_t *info)
 {
@@ -13,7 +14,7 @@ int parse(info_t *info)
 
 	while (cmd)
 	{
-		remove_comment(cmd);
+		remove_comments(cmd);
 		if (!cmd->tokens)
 		{
 			cmd = cmd->next;
@@ -35,7 +36,7 @@ int parse(info_t *info)
 			continue;
 		}
 		tokens = cmd->tokens;
-		for (tok = tokens; tok; tok = *(++tokens))
+		for (tok = *tokens; tok; tok = *(++tokens))
 		{
 			*tokens = dequote(tok);
 			free(tok);

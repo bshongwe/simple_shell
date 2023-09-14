@@ -1,53 +1,20 @@
 #include "hsh.h"
 
 /**
- * expand_alias - func performs recursive alias expansion on curr cmd
+ * expand_aliases - func performs recursive alias expansion on current cmd
  * @aliases: alias list
- * @tokptr: curr tokens pointer
- * Return: alias name (Success), fails (0)
- */
-char *expand_alias(alias_t *aliases, char ***tokptr)
-{
-	char **alias_tokens, **tokens = *tokptr;
-
-	if (!*tokens)
-	{
-		return (NULL);
-	}
-
-	while (aliases)
-	{
-		if (!_strcmp(*tokens, aliases->key))
-		{
-			alias_tokens = tokenize(aliases->val);
-			*tokptr = arrjoin(alias_tokens, tokens + 1);
-
-			free_tokens(&tokens);
-			free_tokens(&alias_tokens);
-
-			return (aliases->key);
-		}
-		aliases = aliases->next;
-	}
-	return (NULL);
-}
-
-/**
- * expand_aliases - func performs recursive alias expansion on curr cmd
- * @aliases: alias list
- * @tokptr: curr tokens pointer
- * Return: current pointer (Success), fails (0)
+ * @tokptr: current tokens pointer
+ * Return: If expansion succeeds, return token pointer,
+ * otherwise, return 0
  */
 void expand_aliases(alias_t *aliases, char ***tokptr)
 {
-	char **new, **old, *name, value, *temp;
+	char **new, **old, *name, *value, *temp;
 
 	if (!*tokptr)
-	{
 		return;
-	}
 	do {
-		name = expand_aliase(aliases, tokptr);
+		name = expand_alias(aliases, tokptr);
 		value = get_dict_val(aliases, name);
 		if (value && *value && _isspace(value[_strlen(value) - 1]))
 		{
@@ -65,4 +32,35 @@ void expand_aliases(alias_t *aliases, char ***tokptr)
 			free_tokens(&new);
 		}
 	} while (name && **tokptr && _strcmp(name, **tokptr));
+}
+
+/**
+ * expand_alias - func performs single alias expansion on current cmd
+ * @aliases: alias list
+ * @tokptr: current tokens pointer
+ * Return: If expansion succeeds, return a pointer the alias name,
+ * otherwise, return NULL
+ */
+char *expand_alias(alias_t *aliases, char ***tokptr)
+{
+	char **alias_tokens, **tokens = *tokptr;
+
+	if (!*tokens)
+		return (NULL);
+
+	while (aliases)
+	{
+		if (!_strcmp(*tokens, aliases->key))
+		{
+			alias_tokens = tokenize(aliases->val);
+			*tokptr = arrjoin(alias_tokens, tokens + 1);
+
+			free_tokens(&tokens);
+			free_tokens(&alias_tokens);
+
+			return (aliases->key);
+		}
+		aliases = aliases->next;
+	}
+	return (NULL);
 }

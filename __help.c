@@ -1,16 +1,16 @@
 #include "builtins.h"
 
 /**
- * __help - func displays builtin cmd prompts
+ * __help - func shows help for builtins cmds
  * @info: shell info
- * Return: status (Success)
+ * Return: status
  */
 int __help(struct info *info)
 {
-	size_t len = 0;
 	const builtin_t *bp = NULL;
 	char * const *args = info->tokens + 1;
 	const char *desc = NULL;
+	size_t len = 0;
 
 	if (*args)
 	{
@@ -35,7 +35,7 @@ int __help(struct info *info)
 			args += 1;
 		}
 		if (info->status == EXIT_FAILURE)
-			perrorl_default(*info->argv, info->lineno, "no topics match",
+			perrorl_default(*info->argv, info->lineno, "No topics match",
 					*info->tokens, *(args - 1), NULL);
 		return (info->status);
 	}

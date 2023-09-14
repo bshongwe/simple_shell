@@ -1,10 +1,10 @@
 #include "builtins.h"
 
 /**
- * __exit - func exits shell programme
- * @info: input args
- * Return: int info (Success)
- */
+  * __exit - func exits shell
+  * @info: args passed
+  * Return: int
+  */
 int __exit(info_t *info)
 {
 	char **args = info->tokens + 1;
@@ -12,7 +12,9 @@ int __exit(info_t *info)
 	if (*args)
 	{
 		if (_isnumber(*args) && atou(*args) <= INT_MAX)
+		{
 			info->status = atou(*args);
+		}
 		else
 		{
 			perrorl_default(*info->argv, info->lineno, *args,
@@ -23,9 +25,7 @@ int __exit(info_t *info)
 		}
 	}
 	if (info->file)
-	{
 		close(info->fileno);
-	}
 
 	exit(free_info(info));
 }

@@ -3,6 +3,8 @@
 
 /* Libraries */
 #include <stdlib.h>
+#include "quote.h"
+#include "string.h"
 
 /* Main Prototypes */
 char **tokenize(const char *str);
@@ -10,7 +12,7 @@ void free_tokens(char ***tokens);
 
 /* Midddleware */
 size_t count_tokens(const char *str);
-size_t count_tokens_no_quote(const char *str);
+size_t count_tokens_noquote(const char *str);
 
 /* Additional Mem-ware */
 char **tokenize_noquote(const char *str);

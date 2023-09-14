@@ -1,29 +1,31 @@
-#ifndef COMMAND_H
-#define COMMAND_H
+#ifndef _COMMAND_H_
+#define _COMMAND_H_
 
-#include "types.h"
-#include "string.h"
 #include <stdlib.h>
-#include "tokens.h"
+#include "string.h"
 #include "quote.h"
+#include "types.h"
+#include "tokens.h"
 
 /**
- * struct cmdlist - func for link list cmds
- * @next: next cmd
- * @tree: cmd bin tree
- * @tokens: specific cmd token iD
+ * enum cmdlist_sep_n - numeric vals for cmmd list separators
+ * @SEMICOLON: ;
+ * @AMPERSAND: &
+ * @AND: &&
+ * @OR: ||
  */
-struct cmdlist
+typedef enum cmdlist_sep_n
 {
-	char **tokens;
-	struct cmdlist *next;
-	struct cmdtree *tree;
-};
+	SEMICOLON = 1,
+	AMPERSAND = 2,
+	AND       = 4,
+	OR        = 8
+} cmdlist_sep_n_t;
 
 /**
- * struct cmdlist_sep -struct for cmd list sep
- * @sep: cmd sep
- * @n: specific num val
+ * struct cmdlist_sep - struct cmd list separator
+ * @sep: cmd separator
+ * @n: the corresponding numeric value
  */
 typedef struct cmdlist_sep
 {
@@ -32,44 +34,44 @@ typedef struct cmdlist_sep
 } cmdlist_sep_t;
 
 /**
- * struct cmdtree - cmds bin tree
- * @success: cmd to exec when prev cmd fails
- * @failure: cmd to exec when prev cmd fails
- * @tokens: cmd with no seps
- * @sep: next list sep
+ * struct cmdlist - struct for cmds linked list
+ * @next: next cmd
+ * @tree: cmd bin tree
+ * @tokens: the tokens for each command in the tree
  */
-struct cmdtree
+struct cmdlist
 {
-	const char * const *tokens;
-	struct cmdlist_sep sep;
-	struct cmdtree *success;
-	struct cmdtree *failure;
+	struct cmdlist *next;
+	struct cmdtree *tree;
+	char **tokens;
 };
 
 /**
- * enum cmdlist_sep_n - command list seperators num vals
- * @SEMICOLON: ;
- * @AMPERSAND: &
- * @AND: &&
- * @OR: ||
+ * struct cmdtree - func for cmds binary tree
+ * @success: cmd to execute upon failure
+ * @failure: cmd to execute upon success
+ * @tokens: simple command with no separators
+ * @sep: preceding list separator
  */
-typedef enum cmdlist_sep_n /* need to assign values below */
+struct cmdtree
 {
-	SEMICOLON = 1,
-	AMPERSAND = 2,
-	AND       = 4,
-	OR        = 8
-} cmdlist_sep_n_t;
+	struct cmdtree *success;
+	struct cmdtree *failure;
+	const char * const *tokens;
+	struct cmdlist_sep sep;
+};
 
-/* Prototypes entered below */
-void free_cmdtree(cmdtree_t **rootptr);
-void free_cmdlist(cmdlist_t **headptr);
-char **pop_cmd(cmdlist_t **headptr);
 size_t split_cmd(char *cmd);
-cmdtree_t *cmd_to_tree(const char * const *tokens);
-cmdlist_t *del_cmd(cmdlist_t **headptr, size_t index);
+
 cmdlist_t *_cmd_to_list(cmdlist_t **tailptr, char *split, size_t count);
-cmdlist_t *add_cmd_end(cmdlist_t **headptr, const char *cmd);
 cmdlist_t *cmd_to_list(const char *cmd);
 
-#endif /* end of COMMAND_H file */
+char **pop_cmd(cmdlist_t **headptr);
+void free_cmdlist(cmdlist_t **headptr);
+cmdlist_t *add_cmd_end(cmdlist_t **headptr, const char *cmd);
+cmdlist_t *del_cmd(cmdlist_t **headptr, size_t index);
+
+void free_cmdtree(cmdtree_t **rootptr);
+cmdtree_t *cmd_to_tree(const char * const *tokens);
+
+#endif /* end of _COMMAND_H_ file */
