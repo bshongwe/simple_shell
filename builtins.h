@@ -96,4 +96,7 @@ int __history(info_t *info);
 int __setenv(info_t *info);
 int __unsetenv(info_t *info);
 
+void __cd_success(info_t *info);
+void __cd_error(info_t *info, char *dir);
+
 #endif /* _BUILTINS_H_ */
