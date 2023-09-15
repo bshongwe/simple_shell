@@ -32,7 +32,7 @@ ssize_t _memchr(const void *src, unsigned char chr, size_t n)
  * _memcpy - func copies memory area
  * @dest: start of the target area pointer
  * @src: start of the source area pointer
- * @n: num bytes to copy 
+ * @n: num bytes to copy
  * Return: a pointer to dest
  */
 void *_memcpy(void *dest, const void *src, size_t n)
