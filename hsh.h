@@ -44,4 +44,4 @@ void remove_comments(cmdlist_t *cmd);
 void open_script(info_t *info);
 void _sigint(int signal);
 
-#endif /* SHELL_H */
+#endif /* end of SHELL_H file */
