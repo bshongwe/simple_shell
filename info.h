@@ -17,6 +17,7 @@
 #include "alias.h"
 
 extern char **environ;
+typedef int pid_t;
 
 /**
   * struct info - shell state
