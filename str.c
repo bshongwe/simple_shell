@@ -11,7 +11,9 @@ ssize_t _strchr(const char *str, char chr)
 	ssize_t index;
 
 	if (!str)
+	{
 		return (-1);
+	}
 
 	for (index = 0; str[index]; ++index)
 	{
@@ -25,8 +27,8 @@ ssize_t _strchr(const char *str, char chr)
 /**
  * _strdup - func creates string copy in new array
  * @str: string to copy pointer
- * Return: If str is NULL or if memory allocation fails, return NULL, otherwise
- * return new copy pointer
+ * Return: If str is NULL or if memory allocation fails, return NULL,
+ * otherwise return new copy pointer
  */
 char *_strdup(const char *str)
 {
@@ -34,7 +36,9 @@ char *_strdup(const char *str)
 	size_t size = 0;
 
 	if (!str)
+	{
 		return (NULL);
+	}
 
 	while (str[size++])
 		;
@@ -44,7 +48,9 @@ char *_strdup(const char *str)
 		return (NULL);
 
 	while (size--)
+	{
 		dup[size] = str[size];
+	}
 
 	return (dup);
 }
@@ -59,10 +65,14 @@ ssize_t _strlen(const char *str)
 	const char *pos = str;
 
 	if (!str)
+	{
 		return (-1);
+	}
 
 	while (*pos)
+	{
 		++pos;
+	}
 
 	return (pos - str);
 }
@@ -84,9 +94,13 @@ int _strcmp(const char *s1, const char *s2)
 	}
 
 	if (*s1)
+	{
 		return (1);
+	}
 	if (*s2)
+	{
 		return (-1);
+	}
 
 	return (0);
 }
