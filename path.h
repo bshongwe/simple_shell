@@ -1,8 +1,5 @@
-#ifndef PATH_H
-#define PATH_H
-
-// #define S_IFMT (S_IFBLK | S_IFCHR | S_IFIFO | S_IFREG | S_IFDIR | S_IFLNK)
-// #define S_IFDIR 0040000
+#ifndef _PATH_H_
+#define _PATH_H_
 
 /* Path Libraries */
 #include <unistd.h>

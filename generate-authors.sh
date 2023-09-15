@@ -7,6 +7,8 @@ ROOTDIR="$(git -C "$SCRIPTDIR" rev-parse --show-toplevel)"
 
 set -x
 
+git -C "$ROOTDIR" fetch
+
 cat > "${ROOTDIR}/AUTHORS" <<- EOF
   # This file lists all contributors to the repository
 

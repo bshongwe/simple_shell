@@ -1,3 +1,4 @@
+#include <stat.h>
 #include "path.h"
 
 /**
