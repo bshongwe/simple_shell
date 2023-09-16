@@ -63,7 +63,11 @@ quote_state_t _read_input(char **lineptr, int fd)
 				state = quote_state(line[index]);
 				if (state & (QUOTE_DOUBLE | QUOTE_SINGLE | QUOTE_ESCAPE))
 					index += 1;
+					argc = 4;
+					[[fallthrough]];
 			} while (line[index]);
+		case 1:
+			break;
 		}
 	}
 	return (state);
