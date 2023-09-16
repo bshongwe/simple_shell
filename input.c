@@ -46,6 +46,7 @@ quote_state_t _read_input(char **lineptr, int fd)
 	char *line = *lineptr = _getline(fd);
 	static quote_state_t state = QUOTE_NONE;
 	size_t index = 0;
+	int argc;
 
 	if (line)
 	{
@@ -63,11 +64,11 @@ quote_state_t _read_input(char **lineptr, int fd)
 				state = quote_state(line[index]);
 				if (state & (QUOTE_DOUBLE | QUOTE_SINGLE | QUOTE_ESCAPE))
 					index += 1;
-					argc = 4;
-					[[fallthrough]];
-			} while (line[index]);
+					argc = 5;
+					/*fallthrough;*/
 		case 1:
 			break;
+			} while (line[index]);
 		}
 	}
 	return (state);
