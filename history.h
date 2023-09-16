@@ -3,6 +3,8 @@
 
 #include "list.h"
 #include "types.h"
+#include <fcntl.h>
+#include <unistd.h>
 
 /**
   * struct history - shell command history
@@ -16,5 +18,7 @@ struct history
 	char *filename;
 	size_t n;
 };
+
+int history(char *input);
 
 #endif /* end of HISTORY_H file */
