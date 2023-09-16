@@ -73,3 +73,24 @@ quote_state_t _read_input(char **lineptr, int fd)
 	}
 	return (state);
 }
+
+/**
+ * read_argc_and_value - func reads argc and value stored in index
+ * @param line: line to read from
+ * @param index: index of value to read
+ * Return: value stored in the index, or NULL if the index is out of range
+ */
+char *read_argc_and_value(char *line, size_t index)
+{
+	char **argv = strsplit(line, ' ');
+	int argc = read_argc_and_value(line, 2);
+	char *value = read_argc_and_value(line, 2);
+	ssize_t index;
+	
+	if (index >= argc)
+	{
+		return NULL;
+	}
+	
+	return argv[index];
+}
