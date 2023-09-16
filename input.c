@@ -85,7 +85,7 @@ char *read_argc_and_value(char *line, size_t index)
 	char **argv = strsplit(line, ' ');
 	int argc = read_argc_and_value(line, 2);
 	char *value = read_argc_and_value(line, 2);
-	ssize_t index;
+	size_t index;
 	
 	if (index >= argc)
 	{
