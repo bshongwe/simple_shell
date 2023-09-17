@@ -7,7 +7,7 @@
  */
 int history(char *input)
 {
-	char *filename = ".simple_shell_history";
+	char *filename = ".shell_history";
 	ssize_t fd;
 	ssize_t w;
 	int len = 0;
