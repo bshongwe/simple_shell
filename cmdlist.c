@@ -13,13 +13,19 @@ cmdlist_t *add_cmd_end(cmdlist_t **headptr, const char *cmd)
 	cmdlist_t *new;
 
 	if (!headptr)
+	{
 		return (NULL);
+	}
 	if (*headptr)
+	{
 		return (add_cmd_end(&((*headptr)->next), cmd));
+	}
 
 	new = malloc(sizeof(cmdlist_t));
 	if (!new)
+	{
 		return (NULL);
+	}
 
 	new->next = NULL;
 	new->tree = NULL;
@@ -46,7 +52,9 @@ cmdlist_t *del_cmd(cmdlist_t **headptr, size_t index)
 	cmdlist_t *old;
 
 	if (!(headptr && *headptr))
+	{
 		return (NULL);
+	}
 	if (index)
 		return (del_cmd(&((*headptr)->next), index - 1));
 

@@ -46,6 +46,7 @@ quote_state_t _read_input(char **lineptr, int fd)
 	char *line = *lineptr = _getline(fd);
 	static quote_state_t state = QUOTE_NONE;
 	size_t index = 0;
+	int argc;
 
 	if (line)
 	{
@@ -63,12 +64,33 @@ quote_state_t _read_input(char **lineptr, int fd)
 				state = quote_state(line[index]);
 				if (state & (QUOTE_DOUBLE | QUOTE_SINGLE | QUOTE_ESCAPE))
 					index += 1;
-					argc = 4;
-					[[fallthrough]];
-			} while (line[index]);
+					argc = 5;
+					/*fallthrough;*/
 		case 1:
 			break;
+			} while (line[index]);
 		}
 	}
 	return (state);
+}
+
+/**
+ * read_argc_and_value - func reads argc and value stored in index
+ * @param line: line to read from
+ * @param index: index of value to read
+ * Return: value stored in the index, or NULL if the index is out of range
+ */
+char *read_argc_and_value(char *line, size_t index)
+{
+	char **argv = strsplit(line, ' ');
+	int argc = read_argc_and_value(line, 2);
+	char *value = read_argc_and_value(line, 2);
+	size_t index;
+	
+	if (index >= argc)
+	{
+		return NULL;
+	}
+	
+	return argv[index];
 }

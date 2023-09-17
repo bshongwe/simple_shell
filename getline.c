@@ -44,6 +44,7 @@ static void *_realloc(void *old, size_t old_size, size_t new_size)
 static char *_getline_next(buf_t *buf, char **line, size_t *size, size_t n)
 {
 	char *temp = NULL;
+	char *ptr = malloc(10);
 
 	if (*line)
 		temp = _realloc(*line, *size, *size + n);
@@ -68,6 +69,8 @@ static char *_getline_next(buf_t *buf, char **line, size_t *size, size_t n)
 		free(*line);
 		*line = NULL;
 		*size = 0;
+		free(ptr);
+		ptr = NULL;
 	}
 	return (*line);
 }
