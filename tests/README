@@ -1,0 +1,58 @@
+# TEST SUITE
+To get going on the tests, simply copy the files into your current project directory.
+
+The "results" directory stores test results
+
+  <code>results</code>
+
+
+Command that runs all the commands:
+
+  <code>./run-tests.csh</code>
+
+
+To run a specific test, type:
+
+  <code>./run-tests.csh <testNumber></code>
+
+as in
+
+  <code>./run-tests.csh atou.c</code>
+
+
+Each specific test attends to each specific test case.
+
+# Test Description
+ 
+### Basic Functionality
+ 2 pwd only
+ 3 exit command
+ 4 cd with an argument
+ 5 simple external command
+ 11 Redirected output - simple redirection
+ 21 Simple batch file - many commands
+ 7 Multiple Commands: multiple commands separated by ";"
+ 15 Parallel Commands: multiple commands separated by "+"
+ 24 cd without an argument
+ 34 Interactive mode - good commands
+
+### Error Handling
+ 0 too many command-line arguments
+ 1 input file - does not exist
+ 6 command longer than 512 characters
+ 12 Redirected output - output to invalid filename
+ 20 nonexecutable command
+ 22 Interactive mode - mixture of good and bad commands
+ 23 pwd with an argument
+
+### Corner Cases
+ 8 Multiple Commands: multiple commands with ";", and spaces
+ 13 Multiple Commands: with redirection
+ 14 Parallel Commands: command contains only "+"
+ 17 Parallel Commands: Exit in the middle
+ 19 Multiple Commands: Exit in the middle
+ 25 Multiple Commands: command contains a series of ";"s 
+ 26 Multiple Commands: multiple commands separated by series of ";" and spaces
+ 29 Parallel Commands: with redirected output 
+ 30 Parallel Commands: Exit in the middle
+ 33 command line contains only spaces and groups of "+"s
