@@ -58,7 +58,7 @@ if (!executed) {
 }
 
 
-# Copmilation:
+# Compilation:
 Compile and run the updated code using the following steps:
 
 1. <code>$ gcc -o hsh shell.c</code>
@@ -79,3 +79,5 @@ Compile and run the updated code using the following steps:
 <code>hsh> TAB<tab></code>
 <code>hsh> echo $HOME</code>
 <code>/home/user</code>
+
+Not sure if we'll have time to fully develop and utilise this suite #LOL
