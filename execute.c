@@ -1,4 +1,46 @@
 #include "hsh.h"
+#include <sys/types.h>
+#include <stdio.h>
+
+/**
+ * main - func gets and stores parent process ID and forks child process
+ * @parent_pid: process ID of parent process
+ * @child_pid: process ID of child process
+ * @buf: Buffer used to format output strings
+ * Return: fork success (1), fork fail (1)
+ */
+
+int main(void)
+{
+	pid_t parent_pid, child_pid;
+	char buf[256];
+
+	parent_pid = getpid();
+	child_pid = fork();
+
+	if (child_pid < 0)
+	{		
+		write(STDERR_FILENO, "Fork failed\n", 12);
+		return 1;
+	}
+	else if (child_pid == 0)
+	{
+		int len = snprintf(buf, sizeof(buf), "child PID: %d\n", getpid());
+		write(STDOUT_FILENO, buf, len);
+		len = snprintf(buf, sizeof(buf), "parent PID: %d\n", getppid());
+		write(STDOUT_FILENO, buf, len);
+	}
+	else
+	{
+		int len = snprintf(buf, sizeof(buf), "parent PID: %d\n", getpid());
+		write(STDOUT_FILENO, buf, len);
+		len = snprintf(buf, sizeof(buf), "child PID: %d\n", child_pid);
+		write(STDOUT_FILENO, buf, len);
+	}
+
+	return 0;
+}
+
 
 /**
   * execute - func executes cmd
