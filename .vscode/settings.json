@@ -1,9 +1,0 @@
-{
-    "makefile.launchConfigurations": [
-        {
-            "cwd": "/home/dev/simple_shell",
-            "binaryPath": "/home/dev/simple_shell/hsh",
-            "binaryArgs": []
-        }
-    ]
-}
