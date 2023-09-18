@@ -36,6 +36,7 @@ quote_state_t _read_input(char **lineptr, int fd);
 int parse(info_t *info);
 int execute(info_t *info);
 int _execute(info_t *info);
+int main(void);
 void expand_aliases(alias_t *aliases, char ***tokptr);
 char *expand_alias(alias_t *aliases, char ***tokptr);
 void expand_vars(info_t *info, char ***tokptr);
