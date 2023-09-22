@@ -12,6 +12,9 @@ int custom_atoi(const char *str)
 	int sign = 1;
 	int i = 0;
 
+	if (str == NULL)
+		return (0);
+
 	if (str[0] == '-')
 	{
 		sign = -1;
@@ -19,6 +22,9 @@ int custom_atoi(const char *str)
 	}
 	while (str[i] != '\0')
 	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+
 		result = result * 10 + (str[i] - '0');
 		i++;
 	}

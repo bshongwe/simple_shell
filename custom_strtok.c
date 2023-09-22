@@ -13,14 +13,13 @@ char *custom_strtok(char *str, const char *delim)
 	const char *d;
 	char *token_start;
 
-	if (str != NULL)
-	{
-		next_token = str;
-	}
-	if (next_token == NULL || *next_token == '\0')
-	{
+	if (str == NULL || *str == '\0')
 		return (NULL);
-	}
+
+	if (delim == NULL || *delim == '\0')
+		return (NULL);
+
+	next_token = str;
 	token_start = next_token;
 
 	while (*next_token != '\0')

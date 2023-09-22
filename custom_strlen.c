@@ -10,6 +10,9 @@ size_t custom_strlen(const char *str)
 {
 	size_t length = 0;
 
+	if (str == NULL)
+		return (-1);
+
 	while (*str != '\0')
 	{
 		str++;

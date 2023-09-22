@@ -11,6 +11,9 @@ size_t custom_strcspn(const char *str, const char *reject)
 {
 	size_t length = 0;
 
+	if (str == NULL || reject == NULL)
+		return (-1);
+
 	while (*str != '\0')
 	{
 		const char *r = reject;
