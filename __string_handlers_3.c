@@ -28,7 +28,7 @@ char *_itoa(unsigned int n)
 	}
 
 	s[index] = (n % 10) + '0';
-	array_rev(s, len);
+	arr_rev(s, len);
 	s[index + 1] = '\0';
 
 	return (s);

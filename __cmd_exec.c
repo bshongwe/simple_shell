@@ -122,7 +122,7 @@ int echo_bltn(char **cmd, int st)
 	}
 	else
 	{
-		return (print_echo(cmd));
+		return (0);
 	}
 
 	return (1);

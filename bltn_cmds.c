@@ -81,7 +81,7 @@ void exit_bltn(char **cmd, char *input, char **argv, int c, int stat)
 	{
 		if (_isalpha(cmd[1][index++]) != 0)
 		{
-			_prerror(argv, c, cmd); /*error*/
+			_prerror(argv, c, cmd);
 			free(input);
 			free(cmd);
 			exit(2);
@@ -91,7 +91,7 @@ void exit_bltn(char **cmd, char *input, char **argv, int c, int stat)
 			status = _atoi(cmd[1]);
 			if (status == 2)
 			{
-				_prerror(argv, c, cmd); /*error*/
+				_prerror(argv, c, cmd);
 				free(input);
 				free(cmd);
 				exit(status);

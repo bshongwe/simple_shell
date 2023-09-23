@@ -45,6 +45,8 @@ void sig_to_handle(int sig);
 
 /* __cmd_exec.c  */
 int echo_bltn(char **cmd, int st);
+void print_number_int(int st);
+void print_echo(char **cmd);
 int pr_env(__attribute__((unused)) char **cmd,
 	    __attribute__((unused)) int st);
 int history_pr(__attribute__((unused))char **c,
@@ -71,16 +73,19 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void free_all(char **cmd, char *line);
 char *_memcpy(char *dest, char *src, unsigned int n);
 void *fill_cbyte_arr(void *a, int el, unsigned int len);
+void *fill_an_array(void *a, int el, unsigned int len);
 
 /* __path.c */
 int path_exec_cmd(char **cmd);
 char *build_cmd(char *token, char *value);
 char *_getenv(char *name_en_var);
+char *build(char *token, char *value);
 
 /* __print.c */
 void print_num_int(int n);
 void print_num_un(unsigned int n);
 int print_btn_echo(char **cmd);
+void print_number(unsigned int n);
 
 /* __prompt.c */
 void prompt_std(void);
@@ -110,6 +115,8 @@ int _strcmp(char *s1, char *s2);
 void arr_rev(char *arr, int len);
 int intlen(int num);
 int _isalpha(int c);
+void path_cmd(char **cmd);
+void print_error(char *cmd, int c, char **argv);
 
 /* _getline.c */
 void hashtag_handler(char *buff);
@@ -124,6 +131,7 @@ char *_strtok(char *str, const char *delim);
 int pop_bltn(char **cmd, int st);
 int check_bltn(char **cmd);
 void exit_bltn(char **cmd, char *input, char **argv, int c, int stat);
+void _prerror(char **argv, int c, char **cmd);
 
 /* bltn_help_0.c */
 int pr_help(char **cmd, __attribute__((unused))int st);
@@ -144,5 +152,17 @@ void help_setenv(void);
 void file_read(char *file, char **argv);
 void file_treat(char *line, int count, FILE *fp, char **argv);
 void exit_bltn_file(char **cmd, char *line, FILE *fd);
+void error_file(char **argv, int count);
+void treat_file(char *line, int count, FILE *fp, char **argv);
+char **parse_cmd(char *line);
+int handle_builtin(char **cmd, int stat);
+int check_builtin(char **cmd);
+
+/* shell.h*/
+void read_file(char *file, char **argv);
+void prompt(void);
+void history(char *input);
+char **separator(char *input);
+void exit_bul(char **cmd, char *input, char **argv, int count, int stat);
 
 #endif /* end of SHELL_H file */
