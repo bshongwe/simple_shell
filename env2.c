@@ -1,12 +1,36 @@
 #include "main.h"
 
 /**
- * set_env - func sets environment variable
+ * copy_info - copies info to create
+ * a new env or alias
+ * @name: name (env or alias)
+ * @value: value (env or alias)
+ *
+ * Return: new env or alias.
+ */
+char *copy_info(char *name, char *value)
+{
+	char *new;
+	int len_name, len_value, len;
+
+	len_name = _strlen(name);
+	len_value = _strlen(value);
+	len = len_name + len_value + 2;
+	new = malloc(sizeof(char) * (len));
+	_strcpy(new, name);
+	_strcat(new, "=");
+	_strcat(new, value);
+	_strcat(new, "\0");
+
+	return (new);
+}
+
+/**
+ * set_env - sets an environment variable
  *
  * @name: name of the environment variable
  * @value: value of the environment variable
  * @datash: data structure (environ)
- * 
  * Return: no return
  */
 void set_env(char *name, char *value, data_shell *datash)
@@ -34,37 +58,32 @@ void set_env(char *name, char *value, data_shell *datash)
 }
 
 /**
- * copy_info - func copies info to create new env
- * or alias
- * 
- * @name: name (env or alias)
- * @value: value (env or alias)
+ * _setenv - compares env variables names
+ * with the name passed.
+ * @datash: data relevant (env name and env value)
  *
- * Return: new env or alias
+ * Return: 1 on success.
  */
-char *copy_info(char *name, char *value)
+int _setenv(data_shell *datash)
 {
-	char *new;
-	int len_name, len_value, len;
 
-	len_name = _strlen(name);
-	len_value = _strlen(value);
-	len = len_name + len_value + 2;
-	new = malloc(sizeof(char) * (len));
-	_strcpy(new, name);
-	_strcat(new, "=");
-	_strcat(new, value);
-	_strcat(new, "\0");
+	if (datash->args[1] == NULL || datash->args[2] == NULL)
+	{
+		get_error(datash, -1);
+		return (1);
+	}
 
-	return (new);
+	set_env(datash->args[1], datash->args[2], datash);
+
+	return (1);
 }
 
 /**
- * _unsetenv - func deletes environment variable
+ * _unsetenv - deletes a environment variable
  *
  * @datash: data relevant (env name)
  *
- * Return: 1 on success
+ * Return: 1 on success.
  */
 int _unsetenv(data_shell *datash)
 {
@@ -106,25 +125,5 @@ int _unsetenv(data_shell *datash)
 	free(datash->_environ[k]);
 	free(datash->_environ);
 	datash->_environ = realloc_environ;
-	return (1);
-}
-
-/**
- * _setenv - func compares env variables names and name
- * 
- * @datash: data relevant (env name and env value)
- * Return: 1 on success
- */
-int _setenv(data_shell *datash)
-{
-
-	if (datash->args[1] == NULL || datash->args[2] == NULL)
-	{
-		get_error(datash, -1);
-		return (1);
-	}
-
-	set_env(datash->args[1], datash->args[2], datash);
-
 	return (1);
 }

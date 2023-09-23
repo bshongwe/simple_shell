@@ -1,32 +1,29 @@
-#include "main.h"
+ #include "main.h"
 
 /**
- * main - program entry point
+ * free_data - frees data structure
  *
- * @ac: argument count
- * @av: argument vector
- *
- * Return: 0 on success.
+ * @datash: data structure
+ * Return: no return
  */
-int main(int ac, char **av)
+void free_data(data_shell *datash)
 {
-	data_shell datash;
-	(void) ac;
+	unsigned int i;
 
-	signal(SIGINT, get_sigint);
-	set_data(&datash, av);
-	shell_loop(&datash);
-	free_data(&datash);
-	if (datash.status < 0)
-		return (255);
-	return (datash.status);
+	for (i = 0; datash->_environ[i]; i++)
+	{
+		free(datash->_environ[i]);
+	}
+
+	free(datash->_environ);
+	free(datash->pid);
 }
+
 /**
- * set_data - func initializes data structure
+ * set_data - Initialize data structure
  *
  * @datash: data structure
  * @av: argument vector
- * 
  * Return: no return
  */
 void set_data(data_shell *datash, char **av)
@@ -52,22 +49,25 @@ void set_data(data_shell *datash, char **av)
 	datash->_environ[i] = NULL;
 	datash->pid = aux_itoa(getpid());
 }
+
 /**
- * free_data - func frees data structure
+ * main - Entry point
  *
- * @datash: data structure
- * 
- * Return: no return
+ * @ac: argument count
+ * @av: argument vector
+ *
+ * Return: 0 on success.
  */
-void free_data(data_shell *datash)
+int main(int ac, char **av)
 {
-	unsigned int i;
+	data_shell datash;
+	(void) ac;
 
-	for (i = 0; datash->_environ[i]; i++)
-	{
-		free(datash->_environ[i]);
-	}
-
-	free(datash->_environ);
-	free(datash->pid);
+	signal(SIGINT, get_sigint);
+	set_data(&datash, av);
+	shell_loop(&datash);
+	free_data(&datash);
+	if (datash.status < 0)
+		return (255);
+	return (datash.status);
 }

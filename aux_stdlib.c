@@ -1,42 +1,36 @@
 #include "main.h"
 
 /**
- *  * _atoi - func converts string to integer
- *   * @s: string input
- *    * Return: integer
+ *  * get_len - Get the lenght of a number.
+ *   * @n: type int number.
+ *    * Return: Lenght of a number.
  *     */
-int _atoi(char *s)
+int get_len(int n)
 {
-		unsigned int count = 0, size = 0, oi = 0, pn = 1, m = 1, i;
+		unsigned int n1;
+			int lenght = 1;
 
-			while (*(s + count) != '\0')
-					{
-								if (size > 0 && (*(s + count) < '0' || *(s + count) > '9'))
-												break;
-
-										if (*(s + count) == '-')
-														pn *= -1;
-
-												if ((*(s + count) >= '0') && (*(s + count) <= '9'))
-															{
-																			if (size > 0)
-																								m *= 10;
-																						size++;
-																								}
-														count++;
-															}
-
-				for (i = count - size; i < count; i++)
+				if (n < 0)
 						{
-									oi = oi + ((*(s + i) - 48) * m);
-											m /= 10;
+									lenght++;
+											n1 = n * -1;
 												}
-					return (oi * pn);
+					else
+							{
+										n1 = n;
+											}
+						while (n1 > 9)
+								{
+											lenght++;
+													n1 = n1 / 10;
+														}
+
+							return (lenght);
 }
 /**
- *  * aux_itoa - func converts int to string
+ *  * aux_itoa - function converts int to string.
  *   * @n: type int number
- *    * Return: string
+ *    * Return: String.
  *     */
 char *aux_itoa(int n)
 {
@@ -70,30 +64,37 @@ char *aux_itoa(int n)
 															;
 													return (buffer);
 }
+
 /**
- *  * get_len - func gets number lenght
- *   * @n: int type number
- *    * Return: lenght of a number
+ *  * _atoi - converts a string to an integer.
+ *   * @s: input string.
+ *    * Return: integer.
  *     */
-int get_len(int n)
+int _atoi(char *s)
 {
-		unsigned int n1;
-			int lenght = 1;
+		unsigned int count = 0, size = 0, oi = 0, pn = 1, m = 1, i;
 
-				if (n < 0)
+			while (*(s + count) != '\0')
+					{
+								if (size > 0 && (*(s + count) < '0' || *(s + count) > '9'))
+												break;
+
+										if (*(s + count) == '-')
+														pn *= -1;
+
+												if ((*(s + count) >= '0') && (*(s + count) <= '9'))
+															{
+																			if (size > 0)
+																								m *= 10;
+																						size++;
+																								}
+														count++;
+															}
+
+				for (i = count - size; i < count; i++)
 						{
-									lenght++;
-											n1 = n * -1;
+									oi = oi + ((*(s + i) - 48) * m);
+											m /= 10;
 												}
-					else
-							{
-										n1 = n;
-											}
-						while (n1 > 9)
-								{
-											lenght++;
-													n1 = n1 / 10;
-														}
-
-							return (lenght);
+					return (oi * pn);
 }
